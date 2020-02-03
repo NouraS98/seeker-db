@@ -1,6 +1,7 @@
 package com.seekerhub.seeker.service.user;
 
 import com.seekerhub.seeker.dto.Employer.EmployerDto;
+import com.seekerhub.seeker.dto.Freelancer.FreelancerDto;
 import com.seekerhub.seeker.dto.user.UserDto;
 import com.seekerhub.seeker.dto.user.UserForRegisterDto;
 import com.seekerhub.seeker.entity.User;
@@ -21,6 +22,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private EmployerService employerService;
+
+    @Autowired
+    private FreelancerService freelancerService;
 
     @Autowired
     private UserMapper userMapper;
@@ -67,6 +71,8 @@ public class UserServiceImpl implements UserService {
             employerService.save(employerDto);
         } else {
 
+            FreelancerDto freelancerDto = FreelancerDto.builder().user(userMapper.toDto(userToSave)).build();
+             freelancerService.save(freelancerDto);
         }
         return userMapper.toDto(userToSave);
     }

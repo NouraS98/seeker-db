@@ -32,6 +32,7 @@ public class User extends BaseEntity {
 
     })
     private Set<Role> roles = new HashSet<>();
+
     @Column(unique = true)
     private String phone_number;
 
@@ -41,5 +42,8 @@ public class User extends BaseEntity {
 
    @OneToOne(mappedBy = "user")
     private Employer employer;
+
+    @OneToOne(mappedBy = "user")
+    private Freelancer freelancer;
 
 }
