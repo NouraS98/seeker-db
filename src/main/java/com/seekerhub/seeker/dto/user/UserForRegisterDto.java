@@ -9,15 +9,14 @@ import lombok.NoArgsConstructor;
 import java.io.Serializable;
 import java.util.Set;
 
-//JSON هذا اللي بيرجع
-//password بينشال
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserDto implements Serializable {
-    private long id;
+public class UserForRegisterDto implements Serializable {
+
     private String username;
+    private String password;
     private Set<RoleDto> roles;
     private String email;
     private String phone_number;

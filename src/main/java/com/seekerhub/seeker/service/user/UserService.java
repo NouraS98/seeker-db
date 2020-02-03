@@ -1,6 +1,7 @@
 package com.seekerhub.seeker.service.user;
 
 import com.seekerhub.seeker.dto.user.UserDto;
+import com.seekerhub.seeker.dto.user.UserForRegisterDto;
 
 import java.util.List;
 
@@ -11,5 +12,5 @@ public interface UserService<list> {
     UserDto findByUsername(String username);
     UserDto findByEmail (String email);
 
-    UserDto register(UserDto userDto);
+    UserDto register(UserForRegisterDto userDto);
 }

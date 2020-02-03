@@ -2,11 +2,13 @@ package com.seekerhub.seeker.service.user;
 
 import com.seekerhub.seeker.dto.Employer.EmployerDto;
 import com.seekerhub.seeker.dto.user.UserDto;
+import com.seekerhub.seeker.dto.user.UserForRegisterDto;
 import com.seekerhub.seeker.entity.User;
 import com.seekerhub.seeker.mapper.UserMapper;
 import com.seekerhub.seeker.repository.UserRepository;
 import com.seekerhub.seeker.service.employer.EmployerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,6 +24,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserMapper userMapper;
+
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Override
     public UserDto save(UserDto userdto) {
@@ -53,13 +58,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDto register(UserDto userDto) {
+    public UserDto register(UserForRegisterDto userDto) {
         User user = userMapper.toEntity(userDto);
+        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         User userToSave = userRepository.save(user);
         if(userToSave.getRoles().stream().anyMatch(role -> role.getRole().equals("Employee"))){
             EmployerDto employerDto = EmployerDto.builder().user(userMapper.toDto(userToSave)).build();
             employerService.save(employerDto);
-        }else{
+        } else {
 
         }
         return userMapper.toDto(userToSave);
