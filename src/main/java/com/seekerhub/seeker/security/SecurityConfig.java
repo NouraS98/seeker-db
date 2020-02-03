@@ -12,7 +12,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable().authorizeRequests()
                 .antMatchers("/api/user/**").permitAll()
-                .antMatchers("/api/employer/**").permitAll().antMatchers("/api/account/**").permitAll()
+                .antMatchers("/api/employer/**").permitAll().antMatchers("/api/account/**").permitAll().antMatchers("/api/freelancer/**").permitAll()
                 .antMatchers("/api/**").authenticated();
     }
 }

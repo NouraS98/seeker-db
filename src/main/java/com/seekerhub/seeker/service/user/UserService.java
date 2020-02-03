@@ -10,6 +10,5 @@ public interface UserService<list> {
     UserDto findById(long id);
     UserDto findByUsername(String username);
     UserDto findByEmail (String email);
-
     UserDto register(UserDto userDto);
 }
