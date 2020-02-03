@@ -1,11 +1,10 @@
-package com.seekerhub.seeker.service.user;
+package com.seekerhub.seeker.service.employer;
 
 import com.seekerhub.seeker.dto.Employer.EmployerDto;
 
 import com.seekerhub.seeker.entity.Employer;
 import com.seekerhub.seeker.mapper.EmployerMapper;
 import com.seekerhub.seeker.repository.EmployerRepository;
-import com.seekerhub.seeker.service.user.EmployerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

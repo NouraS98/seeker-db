@@ -2,10 +2,10 @@ package com.seekerhub.seeker.service.user;
 
 import com.seekerhub.seeker.dto.Employer.EmployerDto;
 import com.seekerhub.seeker.dto.user.UserDto;
-import com.seekerhub.seeker.entity.Employer;
 import com.seekerhub.seeker.entity.User;
 import com.seekerhub.seeker.mapper.UserMapper;
 import com.seekerhub.seeker.repository.UserRepository;
+import com.seekerhub.seeker.service.employer.EmployerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

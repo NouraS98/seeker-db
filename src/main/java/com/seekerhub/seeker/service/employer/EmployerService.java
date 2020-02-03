@@ -1,4 +1,4 @@
-package com.seekerhub.seeker.service.user;
+package com.seekerhub.seeker.service.employer;
 
 import com.seekerhub.seeker.dto.Employer.EmployerDto;
 import com.seekerhub.seeker.dto.user.UserDto;
