@@ -1,6 +1,8 @@
 package com.seekerhub.seeker.service.account;
 
 import com.seekerhub.seeker.dto.login.LoginDto;
+import com.seekerhub.seeker.dto.user.UserDto;
+import com.seekerhub.seeker.dto.user.UserForRegisterDto;
 import com.seekerhub.seeker.service.security.token.TokenService;
 import com.seekerhub.seeker.service.security.user.SecurityService;
 import com.seekerhub.seeker.service.user.UserService;
@@ -21,6 +23,11 @@ public class AccountServiceImpl implements AccountService {
     @Autowired private UserDetailsService userDetailsService;
     @Autowired private TokenService tokenService;
     @Autowired private SecurityService securityService;
+
+    @Override
+    public UserDto register(UserForRegisterDto userForRegisterDto) {
+        return userService.register(userForRegisterDto);
+    }
 
     @Override
     public String login(LoginDto loginDto) {

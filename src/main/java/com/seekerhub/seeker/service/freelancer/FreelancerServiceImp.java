@@ -1,11 +1,8 @@
-package com.seekerhub.seeker.service.user;
+package com.seekerhub.seeker.service.freelancer;
 
 import com.seekerhub.seeker.dto.Freelancer.FreelancerDto;
-import com.seekerhub.seeker.entity.Employer;
 import com.seekerhub.seeker.entity.Freelancer;
-import com.seekerhub.seeker.mapper.EmployerMapper;
 import com.seekerhub.seeker.mapper.FreelancerMapper;
-import com.seekerhub.seeker.repository.EmployerRepository;
 import com.seekerhub.seeker.repository.FreelancerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

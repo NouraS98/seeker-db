@@ -1,5 +1,6 @@
 package com.seekerhub.seeker.entity;
 
+import com.seekerhub.seeker.enums.RoleEnum;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -29,7 +30,6 @@ public class User extends BaseEntity {
             @JoinColumn(name = "user_id" , referencedColumnName = "id") // التيبل الاول
     }, inverseJoinColumns = {
             @JoinColumn(name = "role_id" , referencedColumnName = "id") // التيبل الثاني
-
     })
     private Set<Role> roles = new HashSet<>();
 
@@ -40,10 +40,17 @@ public class User extends BaseEntity {
     private String national_id;
     private String rating;
 
-   @OneToOne(mappedBy = "user")
+    // TODO: User Entity: cascade = CascadeType.REMOVE
+    @OneToOne(mappedBy = "user")
     private Employer employer;
 
     @OneToOne(mappedBy = "user")
     private Freelancer freelancer;
+
+    @Column(columnDefinition = "boolean default true")
+    private boolean enabled;
+
+    @Enumerated(EnumType.STRING)
+    private RoleEnum currentRole;
 
 }

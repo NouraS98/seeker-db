@@ -18,14 +18,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class AccountController {
 
     @Autowired
-    private UserService userService;
-
-    @Autowired
     private AccountService accountService;
 
     @PostMapping("register")
      public ResponseEntity signUp(@RequestBody UserForRegisterDto userDto){
-        return ResponseEntity.ok(userService.register(userDto));
+        return ResponseEntity.ok(accountService.register(userDto));
     }
 
     @PostMapping("login")
