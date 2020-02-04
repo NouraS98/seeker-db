@@ -51,6 +51,6 @@ public class User extends BaseEntity {
     private boolean enabled;
 
     @Enumerated(EnumType.STRING)
-    private RoleEnum currentRole;
+    private RoleEnum current_type;
 
 }

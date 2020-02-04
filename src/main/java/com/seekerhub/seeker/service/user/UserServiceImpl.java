@@ -88,7 +88,7 @@ public class UserServiceImpl implements UserService {
 
         User user = userMapper.toEntity(userDto);
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-        user.setCurrentRole(RoleEnum.FREELANCER);
+        user.setCurrent_type(RoleEnum.FREELANCER);
         User userToSave = userRepository.save(user);
 
         EmployerDto employerDto = EmployerDto.builder().user(userMapper.toDto(userToSave)).build();
