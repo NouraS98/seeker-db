@@ -5,7 +5,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.xml.ws.soap.Addressing;
 import java.io.Serializable;
 
 @Data
