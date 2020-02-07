@@ -5,6 +5,7 @@ import com.seekerhub.seeker.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequestMapping("api/user")
@@ -37,5 +38,10 @@ public class UserController {
     @GetMapping("email/{email}")
     public ResponseEntity findByEmail(@PathVariable String email){
         return ResponseEntity.ok(userService.findByEmail(email));
+    }
+
+    @PostMapping("/avatar")
+    public void uploadAvatar(@RequestPart("avatar")MultipartFile file) {
+        userService.uploadAvatar(file);
     }
 }

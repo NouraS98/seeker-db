@@ -1,6 +1,8 @@
 package com.seekerhub.seeker.dto.user;
 
 import com.seekerhub.seeker.dto.role.RoleDto;
+import com.seekerhub.seeker.dto.storageDocument.StorageDocumentDto;
+import com.seekerhub.seeker.enums.RoleEnum;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -23,5 +25,7 @@ public class UserDto implements Serializable {
     private String phone_number;
     private String national_id;
     private String rating;
+    private RoleEnum current_type;
+    private StorageDocumentDto avatar;
 
 }

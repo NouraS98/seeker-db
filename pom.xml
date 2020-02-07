@@ -76,6 +76,13 @@
 			<artifactId>jackson-datatype-jdk8</artifactId>
 			<version>2.9.9</version>
 		</dependency>
+
+		<!-- Amazon S3 SDK-->
+		<dependency>
+			<groupId>com.amazonaws</groupId>
+			<artifactId>aws-java-sdk</artifactId>
+			<version>1.11.486</version>
+		</dependency>
 	</dependencies>
 
 	<build>
