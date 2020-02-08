@@ -1,7 +1,9 @@
 package com.seekerhub.seeker.dto.Employer;
 
+import com.seekerhub.seeker.dto.Bid.BidDto;
 import com.seekerhub.seeker.dto.Project.ProjectBasicDto;
 import com.seekerhub.seeker.dto.user.UserDto;
+import com.seekerhub.seeker.entity.Bid;
 import com.seekerhub.seeker.entity.Project;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -24,5 +26,6 @@ public class EmployerDto {
     private UserDto user;
     // حطيت بيسك مو البروجكت العادية عشان مايسوي لوب ومب لازم دايم احط كذا
     private List<ProjectBasicDto> projects = new ArrayList<>();
+    private BidDto bid;
 
 }

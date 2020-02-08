@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 
 @Data
@@ -11,6 +12,6 @@ import javax.persistence.Entity;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Skill extends BaseEntity{
+    @Column(unique = true)
     private String name;
-
 }

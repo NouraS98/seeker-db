@@ -1,14 +1,12 @@
 package com.seekerhub.seeker.entity;
 
+import com.seekerhub.seeker.dto.Employer.EmployerDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.ColumnDefault;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Data
@@ -20,11 +18,19 @@ public class Bid extends BaseEntity{
     private String description;
     private double  price;
     private LocalDateTime deliver_date;
-    @Column(columnDefinition = "text default pending")
+//    @Column(columnDefinition = "text default pending")
     private String  status;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Project project;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Freelancer freelancer;
+
+
+    @OneToOne
+    @JoinColumn(name = "employer_id", referencedColumnName = "id")
+    private Employer employer;
 
 //projectId
     //freelancerId

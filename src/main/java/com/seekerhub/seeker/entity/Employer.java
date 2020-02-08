@@ -23,9 +23,11 @@ public class Employer extends BaseEntity {
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
 
-//    @OneToMany(
-//            mappedBy = "employer"
-//    )
-//    private List<Project> projects = new ArrayList<>();
+    @OneToMany(
+            mappedBy = "employer"
+    )
+    private List<Project> projects = new ArrayList<>();
 
+    @OneToOne(mappedBy = "employer")
+    private Bid bid;
 }

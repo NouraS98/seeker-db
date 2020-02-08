@@ -7,7 +7,9 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Data
 @Entity
@@ -35,8 +37,8 @@ public class Project extends BaseEntity {
     )
     private List<Milestone> milestones = new ArrayList<>();
 
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    private Employer employer;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Employer employer;
 
    //employerId
     //categoryId
@@ -51,5 +53,15 @@ public class Project extends BaseEntity {
         milestone.setProject(null);
 
     }
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "skill_category" , joinColumns = { // هنا اسوي جوين لل٢ تيبلز عشان العلاقة ماني تو ماني
+            @JoinColumn(name = "project_id" , referencedColumnName = "id") // التيبل الاول
+    }, inverseJoinColumns = {
+            @JoinColumn(name = "skill_name" , referencedColumnName = "name") // التيبل الثاني
+    })
+    private Set<Skill> skills = new HashSet<>();
+
+    @ManyToOne
+    private Category category;
 
 }

@@ -6,9 +6,9 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Data
@@ -26,5 +26,13 @@ public class Freelancer extends BaseEntity {
     private int total_response_time;
     private int total_quality_of_work;
     private int num_of_hired_projects;
+
+    @OneToMany(
+            mappedBy = "freelancer",
+            fetch = FetchType.LAZY
+
+    )
+    private List<Bid> bids = new ArrayList<>();
+
 
 }
