@@ -54,7 +54,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDto findById(long id) {
 
-        if (userRepository.existsById(id))
+        if (!userRepository.existsById(id))
             throw new GenericException("User was not found");
 
         return userMapper.toDto(userRepository.getOne(id));
