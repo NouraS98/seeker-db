@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class FreelancerRatingDto {
-
+    private long id;
     private int communication;
     private int professionalism;
     private int onTime;

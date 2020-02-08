@@ -14,7 +14,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserForRegisterDto implements Serializable {
-
+    private long id;
     private String username;
     private String password;
     private Set<RoleDto> roles;

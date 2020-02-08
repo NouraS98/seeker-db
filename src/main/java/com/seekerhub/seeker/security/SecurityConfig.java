@@ -25,6 +25,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     @Override
     public AuthenticationManager authenticationManager() throws Exception {
+
         return super.authenticationManager();
     }
 
@@ -50,6 +51,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/api/chat/**").permitAll()
                 .antMatchers("/api/contract/**").permitAll()
                 .antMatchers("/api/certificate/**").permitAll()
+                .antMatchers("/api/milestone/**").permitAll()
                 .antMatchers("/api/**")
                 .authenticated();
 

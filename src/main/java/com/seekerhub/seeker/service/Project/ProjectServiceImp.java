@@ -21,10 +21,12 @@ public class ProjectServiceImp implements ProjectService{
 
     @Autowired
     ProjectMapper projectMapper;
-
     @Override
     public ProjectDto save(ProjectDto projectDto) {
         Project project = projectMapper.toEntity(projectDto);
+        //TODO:
+//        project.getMilestones().forEach(project::addMilestone);
+
         Project projectToSave = projectRepository.save(project);
         return projectMapper.toDto(projectToSave);
     }

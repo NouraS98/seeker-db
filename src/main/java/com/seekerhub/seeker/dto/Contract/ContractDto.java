@@ -13,6 +13,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ContractDto {
+    private long id;
     private double price;
     private LocalDateTime deadline;
     private String type;

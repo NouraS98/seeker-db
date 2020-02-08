@@ -3,6 +3,9 @@ package com.seekerhub.seeker.service.account;
 import com.seekerhub.seeker.dto.login.LoginDto;
 import com.seekerhub.seeker.dto.user.UserDto;
 import com.seekerhub.seeker.dto.user.UserForRegisterDto;
+import com.seekerhub.seeker.exception.ApiError;
+import com.seekerhub.seeker.exception.GenericException;
+import com.seekerhub.seeker.repository.UserRepository;
 import com.seekerhub.seeker.service.security.token.TokenService;
 import com.seekerhub.seeker.service.security.user.SecurityService;
 import com.seekerhub.seeker.service.user.UserService;
@@ -15,6 +18,10 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class AccountServiceImpl implements AccountService {
 
@@ -23,6 +30,7 @@ public class AccountServiceImpl implements AccountService {
     @Autowired private UserDetailsService userDetailsService;
     @Autowired private TokenService tokenService;
     @Autowired private SecurityService securityService;
+    @Autowired private UserRepository userRepository;
 
     @Override
     public UserDto register(UserForRegisterDto userForRegisterDto) {
@@ -30,6 +38,7 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
+    @Transactional
     public String login(LoginDto loginDto) {
         final Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
@@ -37,6 +46,7 @@ public class AccountServiceImpl implements AccountService {
                         loginDto.getPassword()
                 )
         );
+
         SecurityContextHolder.getContext().setAuthentication(authentication);
         UserDetails userDetails = userDetailsService.loadUserByUsername(loginDto.getEmail());
         final String token = tokenService.generateToken(userDetails);

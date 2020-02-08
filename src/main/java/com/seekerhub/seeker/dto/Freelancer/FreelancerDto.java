@@ -15,7 +15,7 @@ import javax.persistence.OneToOne;
 @NoArgsConstructor
 @AllArgsConstructor
 public class FreelancerDto {
-
+    private long id;
     private UserDto user;
     private String maarof_account;
     private int num_of_ratings;

@@ -1,18 +1,16 @@
-package com.seekerhub.seeker.dto.login;
+package com.seekerhub.seeker.dto.Project;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.io.Serializable;
-
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class LoginDto implements Serializable {
+public class ProjectBasicDto {
     private long id;
-    private String email;
-    private String password;
+    private String title;
+    private String description;
 }

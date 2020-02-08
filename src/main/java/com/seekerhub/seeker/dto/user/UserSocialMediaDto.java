@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserSocialMediaDto {
-
+    private long id;
     private String twitter;
     private String facebook;
     private String linkedIn;

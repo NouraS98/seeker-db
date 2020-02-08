@@ -12,6 +12,7 @@ public interface UserService<list> {
     UserDto findByUsername(String username);
     UserDto findByEmail (String email);
 
+
     UserDto register(UserForRegisterDto userDto);
 
 }

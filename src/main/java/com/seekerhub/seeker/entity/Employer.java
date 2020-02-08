@@ -3,11 +3,11 @@ package com.seekerhub.seeker.entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Cascade;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @Entity
@@ -22,4 +22,10 @@ public class Employer extends BaseEntity {
     @OneToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
+
+//    @OneToMany(
+//            mappedBy = "employer"
+//    )
+//    private List<Project> projects = new ArrayList<>();
+
 }

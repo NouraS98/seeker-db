@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class EmployerRatingDto {
-
+    private long id;
     private int communication;
     private int professionalism;
     private int onTimePayment;
