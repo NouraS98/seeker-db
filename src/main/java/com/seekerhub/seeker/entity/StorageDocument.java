@@ -13,10 +13,13 @@ import javax.persistence.*;
 @AllArgsConstructor
 public class StorageDocument extends BaseEntity {
 
+    // Id for DigitalOcean
     private String key;
 
+    // Name of document
     private String name;
 
+    // Type of document
     @Enumerated(EnumType.STRING)
     private StorageEnum type;
 

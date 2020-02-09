@@ -6,6 +6,7 @@ import com.seekerhub.seeker.dto.Category.CategoryDto;
 import com.seekerhub.seeker.dto.Employer.EmployerDto;
 import com.seekerhub.seeker.dto.Milestone.MilestoneDto;
 import com.seekerhub.seeker.dto.Skill.SkillDto;
+import com.seekerhub.seeker.dto.storageDocument.StorageDocumentDto;
 import com.seekerhub.seeker.entity.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -37,7 +38,7 @@ public class ProjectDto {
     private Set<SkillDto> skills = new HashSet<>();
     private CategoryBasicDto category;
     private String status;
-
+    private List<StorageDocumentDto> attachments = new ArrayList<>();
 
 
 

@@ -41,6 +41,9 @@ public class Project extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     private Employer employer;
 
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<StorageDocument> attachments = new ArrayList<>();
+
    //employerId
     //categoryId
     public void addMilestone(Milestone milestone){

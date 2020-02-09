@@ -13,6 +13,8 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 public class StorageDocumentDto implements Serializable {
+
+    private long id;
     private String name;
     private StorageEnum type;
     private String url;
