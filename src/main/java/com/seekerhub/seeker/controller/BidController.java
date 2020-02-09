@@ -30,7 +30,9 @@ public class BidController {
         return ResponseEntity.ok(bidService.findById(id));
     }
 
-
-
+    @PutMapping("accept-bid/{id}")
+    public ResponseEntity AcceptBid(@PathVariable long id){
+        return ResponseEntity.ok(bidService.acceptBid(id));
+    }
 
 }

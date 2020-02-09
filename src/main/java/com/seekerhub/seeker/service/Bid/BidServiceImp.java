@@ -51,7 +51,7 @@ public class BidServiceImp implements BidService {
 
     @Override
     @Transactional
-    public void acceptBid(long id) {
+    public ContractDto acceptBid(long id) {
         if (!bidRepository.existsById(id))
             throw new GenericException("bid doesn't exists");
 
@@ -62,11 +62,11 @@ public class BidServiceImp implements BidService {
         contractDto.setPrice(bid.getPrice());
         //TODO مدري وش التايب
         contractDto.setType(null);
-        contractService.save(contractDto);
-        bid.setContract(contractMapper.toEntity(contractDto));
+        ContractDto contact = contractService.save(contractDto);
+        bid.setContract(contractMapper.toEntity(contact));
         bidRepository.save(bid);
         projectService.setStatus(bid.getProject().getId());
-
+        return contact;
 
     }
 
