@@ -26,6 +26,5 @@ public class EmployerDto {
     private UserDto user;
     // حطيت بيسك مو البروجكت العادية عشان مايسوي لوب ومب لازم دايم احط كذا
     private List<ProjectBasicDto> projects = new ArrayList<>();
-    private BidDto bid;
 
 }

@@ -4,8 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Data
 @Entity
@@ -14,4 +15,5 @@ import javax.persistence.Entity;
 public class Skill extends BaseEntity{
     @Column(unique = true)
     private String name;
+
 }

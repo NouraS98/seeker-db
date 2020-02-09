@@ -36,6 +36,7 @@ public class ProjectDto {
     private List<MilestoneDto> milestones = new ArrayList<>();
     private Set<SkillDto> skills = new HashSet<>();
     private CategoryBasicDto category;
+    private String status;
 
 
 

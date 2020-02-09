@@ -5,12 +5,11 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Data
 @Entity
@@ -27,6 +26,13 @@ public class Category extends BaseEntity {
     private List<Project> projects = new ArrayList<>();
 
     //categoryId
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "skill_category" , joinColumns = { // هنا اسوي جوين لل٢ تيبلز عشان العلاقة ماني تو ماني
+            @JoinColumn(name = "category_id" , referencedColumnName = "id") // التيبل الاول
+    }, inverseJoinColumns = {
+            @JoinColumn(name = "skill_id" , referencedColumnName = "id") // التيبل الثاني
+    })
+    private Set<Skill> skills = new HashSet<>();
 
 }
 

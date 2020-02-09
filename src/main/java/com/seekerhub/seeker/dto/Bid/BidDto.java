@@ -1,5 +1,6 @@
 package com.seekerhub.seeker.dto.Bid;
 
+import com.seekerhub.seeker.dto.Contract.ContractDto;
 import com.seekerhub.seeker.dto.Employer.EmployerDto;
 import com.seekerhub.seeker.dto.Freelancer.FreelancerBasicDto;
 import com.seekerhub.seeker.dto.Freelancer.FreelancerDto;
@@ -32,5 +33,5 @@ public class BidDto {
     private String  status;
     private ProjectBasicDto project;
     private FreelancerBasicDto freelancer;
-    private EmployerDto employer;
+    private ContractDto contract;
 }

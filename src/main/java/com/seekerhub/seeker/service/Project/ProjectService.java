@@ -8,4 +8,5 @@ public interface ProjectService {
     ProjectDto save(ProjectDto projectDto);
     List<ProjectDto> findAll();
     ProjectDto findById(long id);
+    void setStatus(long id);
 }

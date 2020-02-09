@@ -18,7 +18,8 @@ public class Bid extends BaseEntity{
     private String description;
     private double  price;
     private LocalDateTime deliver_date;
-//    @Column(columnDefinition = "text default pending")
+
+    @ColumnDefault("pending")
     private String  status;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -29,8 +30,8 @@ public class Bid extends BaseEntity{
 
 
     @OneToOne
-    @JoinColumn(name = "employer_id", referencedColumnName = "id")
-    private Employer employer;
+    @JoinColumn(name = "contract_id", referencedColumnName = "id")
+    private Contract contract;
 
 //projectId
     //freelancerId

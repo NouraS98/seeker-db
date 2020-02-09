@@ -10,5 +10,6 @@ public interface BidService {
     BidDto save(BidDto bidDto);
     List<BidDto> findAll();
     BidDto findById(long id);
+    void acceptBid(long id);
 
 }

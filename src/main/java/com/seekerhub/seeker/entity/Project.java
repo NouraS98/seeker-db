@@ -24,6 +24,7 @@ public class Project extends BaseEntity {
     private String  payment_type;
     private LocalDateTime expiry_date;
     private LocalDateTime deadline;
+    private String status;
 
     @OneToMany(
             mappedBy = "project"
@@ -43,21 +44,21 @@ public class Project extends BaseEntity {
    //employerId
     //categoryId
     public void addMilestone(Milestone milestone){
-        milestones.add(milestone);
+//        milestones.add(milestone);
         milestone.setProject(this);
 
     }
 
     public void removeMilestone(Milestone milestone){
-        milestones.remove(milestone);
+//        milestones.remove(milestone);
         milestone.setProject(null);
 
     }
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "skill_category" , joinColumns = { // هنا اسوي جوين لل٢ تيبلز عشان العلاقة ماني تو ماني
+    @JoinTable(name = "skill_project" , joinColumns = { // هنا اسوي جوين لل٢ تيبلز عشان العلاقة ماني تو ماني
             @JoinColumn(name = "project_id" , referencedColumnName = "id") // التيبل الاول
     }, inverseJoinColumns = {
-            @JoinColumn(name = "skill_name" , referencedColumnName = "name") // التيبل الثاني
+            @JoinColumn(name = "skill_id" , referencedColumnName = "id") // التيبل الثاني
     })
     private Set<Skill> skills = new HashSet<>();
 
