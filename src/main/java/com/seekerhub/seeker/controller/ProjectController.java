@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
         @Autowired
         private ProjectService projectService;
 
-        @PostMapping
+        @PostMapping("post")
         public ResponseEntity create(@RequestBody ProjectDto projectDto) {
             return ResponseEntity.ok(projectService.save(projectDto));
         }
