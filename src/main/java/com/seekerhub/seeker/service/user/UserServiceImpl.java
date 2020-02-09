@@ -4,24 +4,37 @@ import com.seekerhub.seeker.dto.Employer.EmployerDto;
 import com.seekerhub.seeker.dto.Freelancer.FreelancerDto;
 import com.seekerhub.seeker.dto.user.UserDto;
 import com.seekerhub.seeker.dto.user.UserForRegisterDto;
+import com.seekerhub.seeker.entity.StorageDocument;
 import com.seekerhub.seeker.entity.User;
 import com.seekerhub.seeker.enums.RoleEnum;
+import com.seekerhub.seeker.enums.StorageEnum;
 import com.seekerhub.seeker.exception.ApiError;
 import com.seekerhub.seeker.exception.GenericException;
 import com.seekerhub.seeker.mapper.UserMapper;
+import com.seekerhub.seeker.model.FileUpload;
 import com.seekerhub.seeker.repository.UserRepository;
 import com.seekerhub.seeker.service.employer.EmployerService;
 import com.seekerhub.seeker.service.freelancer.FreelancerService;
+import com.seekerhub.seeker.service.upload.UploadService;
+import com.seekerhub.seeker.utils.SecurityUtils;
+import org.apache.catalina.security.SecurityUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
+
+    @Value("${app.file-upload.avatar}")
+    private String AVATAR_SPACE_NAME;
+
     //هو يسوي انيشييت للكلاس مو كل مره اسوي نيو
     @Autowired
     private UserRepository userRepository;
@@ -37,6 +50,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
+
+    @Autowired
+    private UploadService uploadService;
 
     @Override
     public UserDto save(UserDto userdto) {
@@ -98,5 +114,36 @@ public class UserServiceImpl implements UserService {
         freelancerService.save(freelancerDto);
 
         return userMapper.toDto(userToSave);
+    }
+
+    @Override
+    public void uploadAvatar(MultipartFile file) {
+
+        // Getting current logged in user
+        String email = SecurityUtils.getCurrentUserLogin();
+        User user = userRepository.findByEmail(email);
+
+        // Setting key for storage: avatar + user Id to make it unique for every user
+        String key = "avatar_" + user.getId();
+
+        // Setting file name
+        String name = file.getOriginalFilename();
+
+        try {
+            // Upload avatar to Avatar Space (DigitalOcean)
+            FileUpload fileUpload = uploadService.upload(AVATAR_SPACE_NAME, key, file);
+
+            // If upload is successful, then create new Storage Document Entity with type AVATAR and set user avatar and save user.
+            if (fileUpload.isSuccess()) {
+                StorageDocument storageDocument = new StorageDocument(key, name, StorageEnum.AVATAR, fileUpload.getUrl(), file.getContentType());
+                user.setAvatar(storageDocument);
+                userRepository.save(user);
+            } else {
+                throw new GenericException("Could not upload avatar");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            throw new GenericException("Could not upload avatar");
+        }
     }
 }

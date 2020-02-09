@@ -56,4 +56,8 @@ public class User extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private RoleEnum current_type;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "avatar_id", referencedColumnName = "id")
+    private StorageDocument avatar;
+
 }

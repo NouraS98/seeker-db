@@ -2,6 +2,7 @@ package com.seekerhub.seeker.service.user;
 
 import com.seekerhub.seeker.dto.user.UserDto;
 import com.seekerhub.seeker.dto.user.UserForRegisterDto;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -14,5 +15,7 @@ public interface UserService<list> {
 
 
     UserDto register(UserForRegisterDto userDto);
+
+    void uploadAvatar(MultipartFile file);
 
 }
