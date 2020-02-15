@@ -15,7 +15,7 @@ public class BidController {
     @Autowired
     private BidService bidService;
 
-    @PostMapping
+    @PostMapping("post")
     public ResponseEntity create(@RequestBody BidDto bidDto) {
         return ResponseEntity.ok(bidService.save(bidDto));
     }
