@@ -11,6 +11,7 @@ public interface ProjectService {
     List<ProjectDto> findAll();
     ProjectDto findById(long id);
     void setStatus(long id);
+    List<ProjectDto> findByStatus(String status);
 
     ProjectDto saveWithAttachments(ProjectDto projectDto, List<MultipartFile> attachments);
 

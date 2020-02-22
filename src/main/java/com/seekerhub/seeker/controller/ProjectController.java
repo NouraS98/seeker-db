@@ -32,6 +32,11 @@ import java.util.List;
             return ResponseEntity.ok(projectService.findAll());
         }
 
+        @PostMapping("status/{status}")
+        public ResponseEntity findByStatus(@PathVariable String status){
+            return ResponseEntity.ok(projectService.findByStatus(status));
+        }
+
         @GetMapping("{id}")
         public ResponseEntity findById(@PathVariable long id) {
             return ResponseEntity.ok(projectService.findById(id));
