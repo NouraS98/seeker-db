@@ -20,7 +20,7 @@ public class BidController {
         return ResponseEntity.ok(bidService.save(bidDto));
     }
 
-    @GetMapping
+    @GetMapping("find-all")
     public ResponseEntity findAll() {
         return ResponseEntity.ok(bidService.findAll());
     }
