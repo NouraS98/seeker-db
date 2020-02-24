@@ -23,6 +23,7 @@ public class CategoryDto {
     private long id;
     private String title;
     private String description;
+    private String type;
     private List<ProjectDto> projects = new ArrayList<>();
     private Set<SkillDto> skills = new HashSet<>();
 

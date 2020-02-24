@@ -18,6 +18,7 @@ import java.util.Set;
 public class Category extends BaseEntity {
     private String title;
     private String description;
+    private String type;
 
 
     @OneToMany(
