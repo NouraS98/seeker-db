@@ -60,6 +60,7 @@ public class BidServiceImp implements BidService {
         ContractDto contractDto = new ContractDto();
         contractDto.setDeadline(bid.getDeliver_date());
         contractDto.setPrice(bid.getPrice());
+
         //TODO مدري وش التايب
         contractDto.setType(null);
         ContractDto contact = contractService.save(contractDto);

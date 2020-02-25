@@ -16,8 +16,7 @@ import com.seekerhub.seeker.model.FileUpload;
 import com.seekerhub.seeker.repository.FreelancerRepository;
 import com.seekerhub.seeker.repository.ProjectRepository;
 import com.seekerhub.seeker.service.upload.UploadService;
-import com.seekerhub.seeker.utils.SecurityUtils;
-import org.hibernate.id.GUIDGenerator;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;

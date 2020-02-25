@@ -40,6 +40,4 @@ public class ProjectDto {
     private String status;
     private List<StorageDocumentDto> attachments = new ArrayList<>();
 
-
-
 }
