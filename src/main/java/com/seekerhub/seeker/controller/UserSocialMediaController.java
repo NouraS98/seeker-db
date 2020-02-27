@@ -15,12 +15,12 @@ public class UserSocialMediaController {
     @Autowired
     private UserSociaMediaService userSociaMediaService;
 
-    @PostMapping
+    @PostMapping("add-accounts")
     public ResponseEntity create(@RequestBody UserSocialMediaDto userSocialMediaDto) {
         return ResponseEntity.ok(userSociaMediaService.save(userSocialMediaDto));
     }
 
-    @GetMapping
+    @GetMapping("find-all")
     public ResponseEntity findAll() {
         return ResponseEntity.ok(userSociaMediaService.findAll());
     }
