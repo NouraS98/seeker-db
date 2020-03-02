@@ -1,5 +1,6 @@
 package com.seekerhub.seeker.repository;
 
+import com.seekerhub.seeker.dto.Freelancer.FreelancerDto;
 import com.seekerhub.seeker.entity.FreelancerRating;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

@@ -33,4 +33,11 @@ public class FreelancerServiceImp implements FreelancerService {
     public FreelancerDto findById(long id) {
         return freelancerMapper.toDto(freelancerRepository.getOne(id));
     }
+
+    @Override
+    public FreelancerDto findByUserId(long user_id) {
+        return freelancerMapper.toDto(freelancerRepository.findByUserId(user_id));
+    }
+
+
 }
