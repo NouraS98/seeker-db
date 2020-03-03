@@ -9,5 +9,6 @@ public interface EmployerService {
     EmployerDto save(EmployerDto employerDto);
     List<EmployerDto> findAll();
     EmployerDto findById(long id);
+EmployerDto getByUserId(long user_id);
 
 }
