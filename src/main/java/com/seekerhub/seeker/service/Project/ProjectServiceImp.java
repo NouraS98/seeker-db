@@ -1,14 +1,13 @@
 package com.seekerhub.seeker.service.Project;
 
+import com.seekerhub.seeker.dto.Employer.EmployerDto;
 import com.seekerhub.seeker.dto.Freelancer.FreelancerDto;
 import com.seekerhub.seeker.dto.Project.ProjectDto;
 import com.seekerhub.seeker.dto.storageDocument.StorageDocumentDto;
-import com.seekerhub.seeker.entity.Freelancer;
-import com.seekerhub.seeker.entity.Project;
-import com.seekerhub.seeker.entity.StorageDocument;
-import com.seekerhub.seeker.entity.User;
+import com.seekerhub.seeker.entity.*;
 import com.seekerhub.seeker.enums.StorageEnum;
 import com.seekerhub.seeker.exception.GenericException;
+import com.seekerhub.seeker.mapper.EmployerMapper;
 import com.seekerhub.seeker.mapper.FreelancerMapper;
 import com.seekerhub.seeker.mapper.ProjectMapper;
 import com.seekerhub.seeker.mapper.StorageMapper;
@@ -43,6 +42,9 @@ public class ProjectServiceImp implements ProjectService{
 
     @Autowired
     StorageMapper storageMapper;
+
+    @Autowired
+    EmployerMapper employerMapper;
 
     @Autowired
     private UploadService uploadService;
@@ -117,11 +119,13 @@ public class ProjectServiceImp implements ProjectService{
     }
 
     @Override
-    public List<ProjectDto> findByStatus(String status) {
+    public List<ProjectDto> findByStatusAndEmployer(String status, EmployerDto employer) {
         if (!projectRepository.existsByStatus(status))
             throw new GenericException("No Projects");
 
-        return projectMapper.toDtos(projectRepository.findByStatus(status)); }
+        return projectMapper.toDtos(projectRepository.findByStatusAndEmployer(status,employerMapper.toEntity(employer)));
+
+    }
 
     @Override
     public StorageDocumentDto addAttachment(long id, MultipartFile file) {
