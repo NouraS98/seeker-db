@@ -14,6 +14,4 @@ public class SkillDto {
     private long id;
     private String name;
 
-
-
 }
