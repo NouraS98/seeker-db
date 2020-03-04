@@ -34,4 +34,9 @@ public class EmployerServiceImp implements EmployerService {
     public EmployerDto findById(long id) {
         return employerMapper.toDto(employerRepository.getOne(id));
     }
+
+    @Override
+    public EmployerDto getByUserId(long user_id) {
+        return employerMapper.toDto(employerRepository.getByUserId(user_id));
+    }
 }

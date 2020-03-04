@@ -1,5 +1,6 @@
 package com.seekerhub.seeker.service.Project;
 
+import com.seekerhub.seeker.dto.Employer.EmployerDto;
 import com.seekerhub.seeker.dto.Project.ProjectDto;
 import com.seekerhub.seeker.dto.storageDocument.StorageDocumentDto;
 import org.springframework.web.multipart.MultipartFile;
@@ -11,7 +12,7 @@ public interface ProjectService {
     List<ProjectDto> findAll();
     ProjectDto findById(long id);
     void setStatus(long id);
-    List<ProjectDto> findByStatus(String status);
+    List<ProjectDto> findByStatusAndEmployer(String status, EmployerDto employer);
 
     ProjectDto saveWithAttachments(ProjectDto projectDto, List<MultipartFile> attachments);
 

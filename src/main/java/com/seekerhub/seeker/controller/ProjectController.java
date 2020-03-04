@@ -1,6 +1,8 @@
 package com.seekerhub.seeker.controller;
 
+import com.seekerhub.seeker.dto.Employer.EmployerDto;
 import com.seekerhub.seeker.dto.Project.ProjectDto;
+import com.seekerhub.seeker.entity.Employer;
 import com.seekerhub.seeker.service.Project.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -33,8 +35,8 @@ import java.util.List;
         }
 
         @PostMapping("status/{status}")
-        public ResponseEntity findByStatus(@PathVariable String status){
-            return ResponseEntity.ok(projectService.findByStatus(status));
+        public ResponseEntity findByStatusAndEmployer(@PathVariable String status, @RequestBody EmployerDto employer){
+            return ResponseEntity.ok(projectService.findByStatusAndEmployer(status,employer));
         }
 
         @GetMapping("{id}")

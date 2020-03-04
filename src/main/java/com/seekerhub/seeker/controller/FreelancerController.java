@@ -29,4 +29,8 @@ public class FreelancerController {
     }
 
 
+    @GetMapping("user_id/{user_id}")
+    public  ResponseEntity findByUserId(@PathVariable long user_id){
+        return  ResponseEntity.ok(freelancerService.findByUserId(user_id));
+    }
 }
