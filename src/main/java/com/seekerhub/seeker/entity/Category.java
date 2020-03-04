@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -15,11 +16,14 @@ import java.util.Set;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-public class Category extends BaseEntity {
+public class Category implements Serializable {
     private String title;
     private String description;
     private String category_type;
 
+    @Id
+    @Column(unique = true)
+    private long id;
 
     @OneToMany(
             mappedBy = "category"
