@@ -127,6 +127,15 @@ public class ProjectServiceImp implements ProjectService{
 
     }
 
+    //todo new 2 hind
+    @Override
+    public List<ProjectDto> findByStatus(String status) {
+        if (!projectRepository.existsByStatus(status))
+            throw new GenericException("No Projects");
+
+        return projectMapper.toDtos(projectRepository.findByStatus(status));
+    }
+
     @Override
     public StorageDocumentDto addAttachment(long id, MultipartFile file) {
         if (!projectRepository.existsById(id))

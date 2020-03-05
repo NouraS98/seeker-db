@@ -2,6 +2,8 @@ package com.seekerhub.seeker.controller;
 
 
 import com.seekerhub.seeker.dto.Bid.BidDto;
+import com.seekerhub.seeker.dto.Freelancer.FreelancerDto;
+import com.seekerhub.seeker.entity.Freelancer;
 import com.seekerhub.seeker.service.Bid.BidService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -34,5 +36,6 @@ public class BidController {
     public ResponseEntity AcceptBid(@PathVariable long id){
         return ResponseEntity.ok(bidService.acceptBid(id));
     }
+
 
 }

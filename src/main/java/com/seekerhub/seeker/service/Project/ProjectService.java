@@ -13,6 +13,8 @@ public interface ProjectService {
     ProjectDto findById(long id);
     void setStatus(long id);
     List<ProjectDto> findByStatusAndEmployer(String status, EmployerDto employer);
+    //todo new 1 hind
+    List<ProjectDto> findByStatus(String status);
 
     ProjectDto saveWithAttachments(ProjectDto projectDto, List<MultipartFile> attachments);
 

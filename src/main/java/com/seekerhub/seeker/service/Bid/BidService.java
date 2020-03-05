@@ -2,7 +2,10 @@ package com.seekerhub.seeker.service.Bid;
 
 import com.seekerhub.seeker.dto.Bid.BidDto;
 import com.seekerhub.seeker.dto.Contract.ContractDto;
+import com.seekerhub.seeker.dto.Freelancer.FreelancerDto;
 import com.seekerhub.seeker.dto.Project.ProjectDto;
+import com.seekerhub.seeker.entity.Bid;
+import com.seekerhub.seeker.entity.Freelancer;
 
 import java.util.List;
 

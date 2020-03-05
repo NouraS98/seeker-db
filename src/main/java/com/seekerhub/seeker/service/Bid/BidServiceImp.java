@@ -31,6 +31,7 @@ public class BidServiceImp implements BidService {
     @Autowired
     ProjectService projectService;
 
+
     @Override
     public BidDto save(BidDto bidDto) {
         Bid bid = bidMapper.toEntity(bidDto);

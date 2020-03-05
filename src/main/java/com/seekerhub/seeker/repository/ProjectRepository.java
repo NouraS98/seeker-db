@@ -14,5 +14,8 @@ public interface ProjectRepository extends JpaRepository<Project, Long> {
 
     boolean existsByStatus(String status);
     List<Project> findByStatusAndEmployer(String status, Employer employer);
+    //todo new 3 hind
+    List<Project> findByStatus(String status);
+
 
 }
