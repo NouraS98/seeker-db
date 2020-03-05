@@ -18,7 +18,7 @@ public class CategoryController {
         return ResponseEntity.ok(categoryService.save(categoryDto));
     }
 
-    @GetMapping
+    @GetMapping("find-all")
     public ResponseEntity findAll() {
         return ResponseEntity.ok(categoryService.findAll());
     }
@@ -28,4 +28,8 @@ public class CategoryController {
         return ResponseEntity.ok(categoryService.findById(id));
     }
 
+//    @GetMapping("category_type/{category_type}")
+//    public ResponseEntity findByCategory_type(@PathVariable String category_type){
+//        return ResponseEntity.ok(categoryService.findByCategory_type(category_type));
+//    }
 }

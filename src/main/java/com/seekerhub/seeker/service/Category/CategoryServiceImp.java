@@ -34,4 +34,10 @@ public class CategoryServiceImp implements CategoryService {
     public CategoryDto findById(long id) {
         return categoryMapper.toDto(categoryRepository.getOne(id));
     }
+
+//    @Override
+//    public List<CategoryDto> findByCategory_type(String category_type) {
+//
+//        return categoryMapper.toDtos(categoryRepository.findByCategory_type(category_type));
+//    }
 }
