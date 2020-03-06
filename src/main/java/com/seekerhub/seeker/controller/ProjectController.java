@@ -1,5 +1,6 @@
 package com.seekerhub.seeker.controller;
 
+import com.seekerhub.seeker.dto.Category.CategoryDto;
 import com.seekerhub.seeker.dto.Employer.EmployerDto;
 import com.seekerhub.seeker.dto.Project.ProjectDto;
 import com.seekerhub.seeker.entity.Employer;
@@ -60,6 +61,13 @@ import java.util.List;
         public void deleteAttachmentById(@PathVariable long id, @PathVariable long attachmentId){
             projectService.deleteAttachmentById(id, attachmentId);
         }
+
+
+
+    @PostMapping("category")
+    public ResponseEntity findProjectByCategory(@RequestBody CategoryDto categoryDto) {
+        return ResponseEntity.ok(projectService.findByCategory(categoryDto));
+    }
 
 
 

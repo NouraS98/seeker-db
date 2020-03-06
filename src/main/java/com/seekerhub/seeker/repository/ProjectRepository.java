@@ -1,6 +1,8 @@
 package com.seekerhub.seeker.repository;
 
+import com.seekerhub.seeker.dto.Category.CategoryDto;
 import com.seekerhub.seeker.dto.Employer.EmployerDto;
+import com.seekerhub.seeker.entity.Category;
 import com.seekerhub.seeker.entity.Employer;
 import com.seekerhub.seeker.entity.Project;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -16,6 +18,11 @@ public interface ProjectRepository extends JpaRepository<Project, Long> {
     List<Project> findByStatusAndEmployer(String status, Employer employer);
     //todo new 3 hind
     List<Project> findByStatus(String status);
+
+    boolean existsByCategory(Category category);
+    List<Project> findByCategory(Category category);
+
+
 
 
 }

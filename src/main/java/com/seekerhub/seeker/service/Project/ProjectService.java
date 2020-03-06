@@ -1,5 +1,6 @@
 package com.seekerhub.seeker.service.Project;
 
+import com.seekerhub.seeker.dto.Category.CategoryDto;
 import com.seekerhub.seeker.dto.Employer.EmployerDto;
 import com.seekerhub.seeker.dto.Project.ProjectDto;
 import com.seekerhub.seeker.dto.storageDocument.StorageDocumentDto;
@@ -21,5 +22,8 @@ public interface ProjectService {
     void deleteAttachmentById(long id, long attachmentId);
 
     StorageDocumentDto addAttachment(long id, MultipartFile attachment);
+
+    List<ProjectDto> findByCategory(CategoryDto categoryDto);
+
 
 }
