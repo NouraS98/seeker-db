@@ -15,5 +15,7 @@ public interface BidService {
     List<BidDto> findAll();
     BidDto findById(long id);
     ContractDto acceptBid(long id);
+    //todo new hind 1
+    List<BidDto> findBidByStatus(String status);
 
 }

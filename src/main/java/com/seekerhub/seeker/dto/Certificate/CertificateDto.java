@@ -17,5 +17,6 @@ public class CertificateDto {
     private int  num_of_posted_Projects;
     private int  total_on_time_payment;
     private UserDto user;
-
+    //todo hind newest
+    private String certificates;
 }

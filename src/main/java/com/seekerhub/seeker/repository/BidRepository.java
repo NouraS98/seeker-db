@@ -10,5 +10,9 @@ import java.util.List;
 
 @Repository
 public interface BidRepository extends JpaRepository<Bid, Long> {
+    boolean existsByStatus(String status);
 
+    //todo 3 hind new
+    //List<Project> findByStatus(String status);
+    List<Bid> findBidByStatus(String status);
 }

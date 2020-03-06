@@ -37,5 +37,18 @@ public class BidController {
         return ResponseEntity.ok(bidService.acceptBid(id));
     }
 
+    /**
+     *   @PostMapping("statuses/{status}")
+     *     public ResponseEntity findByStatus(@PathVariable String status){
+     *             return ResponseEntity.ok(projectService.findByStatus(status));
+     *     }
+     */
+
+    //todo 4 final hind
+
+    @PostMapping("status/{status}")
+    public ResponseEntity findBidByStatus(@PathVariable String status){
+        return ResponseEntity.ok(bidService.findBidByStatus(status));
+    }
 
 }

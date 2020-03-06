@@ -71,6 +71,25 @@ public class BidServiceImp implements BidService {
         return contact;
 
     }
+    /**
+     *     //todo new 2 hind
+     *     @Override
+     *     public List<ProjectDto> findByStatus(String status) {
+     *         if (!projectRepository.existsByStatus(status))
+     *             throw new GenericException("No Projects");
+     *
+     *         return projectMapper.toDtos(projectRepository.findByStatus(status));
+     *     }
+     */
+
+    @Override
+    public List<BidDto> findBidByStatus(String status) {
+        if (!bidRepository.existsByStatus(status))
+            throw new GenericException("No Bids");
+
+        return bidMapper.toDtos(bidRepository.findBidByStatus(status));
+
+    }
 
 
 }

@@ -15,12 +15,12 @@ public class CertificateController {
     @Autowired
     private CertificateService certificateService;
 
-    @PostMapping
+    @PostMapping("create")
     public ResponseEntity create(@RequestBody CertificateDto certificateDto) {
         return ResponseEntity.ok(certificateService.save(certificateDto));
     }
 
-    @GetMapping
+    @GetMapping("find-all")
     public ResponseEntity findAll() {
         return ResponseEntity.ok(certificateService.findAll());
     }

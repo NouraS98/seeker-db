@@ -10,7 +10,8 @@ import javax.persistence.Entity;
 @Entity
 public class Certificate extends BaseEntity{
 
-
+    //todo hind newest
+    private String certificates;
 //freelancerId
 }
 //I have removed the @NoArgsConstructor
