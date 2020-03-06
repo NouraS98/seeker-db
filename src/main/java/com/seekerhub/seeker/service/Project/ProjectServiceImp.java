@@ -1,5 +1,6 @@
 package com.seekerhub.seeker.service.Project;
 
+import com.seekerhub.seeker.dto.Category.CategoryDto;
 import com.seekerhub.seeker.dto.Employer.EmployerDto;
 import com.seekerhub.seeker.dto.Freelancer.FreelancerDto;
 import com.seekerhub.seeker.dto.Project.ProjectDto;
@@ -7,10 +8,7 @@ import com.seekerhub.seeker.dto.storageDocument.StorageDocumentDto;
 import com.seekerhub.seeker.entity.*;
 import com.seekerhub.seeker.enums.StorageEnum;
 import com.seekerhub.seeker.exception.GenericException;
-import com.seekerhub.seeker.mapper.EmployerMapper;
-import com.seekerhub.seeker.mapper.FreelancerMapper;
-import com.seekerhub.seeker.mapper.ProjectMapper;
-import com.seekerhub.seeker.mapper.StorageMapper;
+import com.seekerhub.seeker.mapper.*;
 import com.seekerhub.seeker.model.FileUpload;
 import com.seekerhub.seeker.repository.FreelancerRepository;
 import com.seekerhub.seeker.repository.ProjectRepository;
@@ -45,6 +43,9 @@ public class ProjectServiceImp implements ProjectService{
 
     @Autowired
     EmployerMapper employerMapper;
+
+    @Autowired
+    CategoryMapper categoryMapper;
 
     @Autowired
     private UploadService uploadService;
@@ -169,6 +170,8 @@ public class ProjectServiceImp implements ProjectService{
         }
     }
 
+
+
     @Override
     public void deleteAttachmentById(long id, long attachmentId) {
         if (!projectRepository.existsById(id))
@@ -182,4 +185,16 @@ public class ProjectServiceImp implements ProjectService{
         project.getAttachments().remove(storageDocumentToDelete.get());
         projectRepository.save(project);
     }
+
+
+    @Override
+    public List<ProjectDto> findByCategory(CategoryDto categoryDto) {
+        if (!projectRepository.existsByCategory(categoryMapper.toEntity(categoryDto)))
+            throw new GenericException("No Projects");
+
+        return projectMapper.toDtos(projectRepository.findByCategory(categoryMapper.toEntity(categoryDto)));
+    }
+
+
+
 }

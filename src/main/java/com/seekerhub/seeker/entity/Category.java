@@ -20,6 +20,7 @@ public class Category implements Serializable {
     private String title;
     private String description;
     private String category_type;
+    private String image;
 
     @Id
     @Column(unique = true)

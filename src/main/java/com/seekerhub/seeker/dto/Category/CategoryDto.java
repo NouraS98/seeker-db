@@ -26,6 +26,8 @@ public class CategoryDto {
     private String  category_type;
     private List<ProjectDto> projects = new ArrayList<>();
     private Set<SkillDto> skills = new HashSet<>();
+    private String image;
+
 
 
 }
