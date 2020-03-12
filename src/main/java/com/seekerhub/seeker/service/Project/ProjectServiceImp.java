@@ -115,7 +115,7 @@ public class ProjectServiceImp implements ProjectService{
     if(!projectRepository.existsById(id))
         throw new GenericException("The project was not found");
      Project project = projectRepository.getOne(id);
-     project.setStatus("inProgress");
+     project.setStatus("1");
      projectRepository.save(project);
     }
 

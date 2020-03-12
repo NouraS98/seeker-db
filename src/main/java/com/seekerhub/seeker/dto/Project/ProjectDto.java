@@ -37,6 +37,7 @@ public class ProjectDto {
     private List<MilestoneDto> milestones = new ArrayList<>();
     private Set<SkillDto> skills = new HashSet<>();
     private CategoryBasicDto category;
+    //0 pending , //1 on progress, //2 completed
     private String status;
     private List<StorageDocumentDto> attachments = new ArrayList<>();
 

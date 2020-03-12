@@ -19,7 +19,7 @@ public class Bid extends BaseEntity{
     private double  price;
     private LocalDateTime deliver_date;
 
-    @ColumnDefault("pending")
+    @ColumnDefault("0")
     private String  status;
 
     @ManyToOne(fetch = FetchType.LAZY)
