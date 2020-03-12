@@ -30,7 +30,7 @@ import java.util.List;
             return ResponseEntity.ok(projectService.saveWithAttachments(projectDto, attachments));
         }
 
-        @GetMapping
+        @GetMapping ("findAll")
         public ResponseEntity findAll() {
             return ResponseEntity.ok(projectService.findAll());
         }
