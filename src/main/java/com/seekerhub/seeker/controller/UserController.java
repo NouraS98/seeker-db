@@ -19,7 +19,7 @@ public class UserController {
         return ResponseEntity.ok(userService.save(user));
     }
 
-    @GetMapping
+    @GetMapping("findAll")
     public ResponseEntity findAll() {
         return ResponseEntity.ok(userService.findAll());
     }
