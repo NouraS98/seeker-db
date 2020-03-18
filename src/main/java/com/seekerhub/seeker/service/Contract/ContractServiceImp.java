@@ -34,4 +34,9 @@ public class ContractServiceImp implements ContractService {
     public ContractDto findById(long id) {
         return contractMapper.toDto(contractRepository.getOne(id));
     }
+
+    @Override
+    public ContractDto findByProjectId(long project_id) {
+        return contractMapper.toDto(contractRepository.findByProjectId(project_id));
+    }
 }

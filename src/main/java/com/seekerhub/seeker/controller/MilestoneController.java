@@ -17,7 +17,7 @@ public class MilestoneController {
     @Autowired
     private MilestoneService milestoneService;
 
-    @PostMapping
+    @PostMapping("create")
     public ResponseEntity create(@RequestBody MilestoneDto milestoneDto) {
         return ResponseEntity.ok(milestoneService.save(milestoneDto));
     }
