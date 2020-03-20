@@ -1,17 +1,17 @@
 package com.seekerhub.seeker.dto.Project;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.seekerhub.seeker.dto.Bid.BidDto;
 import com.seekerhub.seeker.dto.Category.CategoryBasicDto;
-import com.seekerhub.seeker.dto.Category.CategoryDto;
 import com.seekerhub.seeker.dto.Employer.EmployerDto;
 import com.seekerhub.seeker.dto.Milestone.MilestoneDto;
 import com.seekerhub.seeker.dto.Skill.SkillDto;
 import com.seekerhub.seeker.dto.storageDocument.StorageDocumentDto;
-import com.seekerhub.seeker.entity.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;

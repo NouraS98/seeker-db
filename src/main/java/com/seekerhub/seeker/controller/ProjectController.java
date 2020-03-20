@@ -70,5 +70,20 @@ import java.util.List;
     }
 
 
+    //delete project
+    @DeleteMapping("{id}")
+    public void deleteProjectById(@PathVariable long id){
+        projectService.deleteProjectById(id);
+    }
+
+    //extend
+    @PostMapping("extend")
+    public void extendExpiryDate(@RequestBody ProjectDto projectDto) {
+
+        projectService.extendProjectById( projectDto.getId(),projectDto.getExpiry_date());
+
+    }
+
+
 
     }

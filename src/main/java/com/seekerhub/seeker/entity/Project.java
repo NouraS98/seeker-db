@@ -57,6 +57,8 @@ public class Project extends BaseEntity {
         milestone.setProject(null);
 
     }
+
+
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "skill_project" , joinColumns = { // هنا اسوي جوين لل٢ تيبلز عشان العلاقة ماني تو ماني
             @JoinColumn(name = "project_id" , referencedColumnName = "id") // التيبل الاول

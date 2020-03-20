@@ -6,6 +6,7 @@ import com.seekerhub.seeker.dto.Project.ProjectDto;
 import com.seekerhub.seeker.dto.storageDocument.StorageDocumentDto;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 public interface ProjectService {
@@ -25,6 +26,13 @@ public interface ProjectService {
 
 
     List<ProjectDto> findByCategory(CategoryDto categoryDto);
+    //todo raghad add extend and delete funcrions
+    //delete
+    void deleteProjectById(long id);
+    //extend
+    void extendProjectById(long id, LocalDateTime localDateTime);
+
+
 
 
 }
