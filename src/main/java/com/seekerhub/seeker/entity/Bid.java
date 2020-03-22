@@ -29,9 +29,9 @@ public class Bid extends BaseEntity{
     private Freelancer freelancer;
 
 
-    @OneToOne
-    @JoinColumn(name = "contract_id", referencedColumnName = "id")
-    private Contract contract;
+//    @OneToOne
+//    @JoinColumn(name = "contract_id", referencedColumnName = "id")
+//    private Contract contract;
 
 //projectId
     //freelancerId

@@ -6,6 +6,8 @@ import com.seekerhub.seeker.entity.Bid;
 import com.seekerhub.seeker.exception.GenericException;
 import com.seekerhub.seeker.mapper.BidMapper;
 import com.seekerhub.seeker.mapper.ContractMapper;
+import com.seekerhub.seeker.mapper.FreelancerMapper;
+import com.seekerhub.seeker.mapper.ProjectMapper;
 import com.seekerhub.seeker.repository.BidRepository;
 import com.seekerhub.seeker.service.Contract.ContractService;
 import com.seekerhub.seeker.service.Project.ProjectService;
@@ -30,6 +32,12 @@ public class BidServiceImp implements BidService {
 
     @Autowired
     ProjectService projectService;
+
+    @Autowired
+    ProjectMapper projectMapper;
+
+    @Autowired
+    FreelancerMapper freelancerMapper;
 
 
     @Override
@@ -61,12 +69,16 @@ public class BidServiceImp implements BidService {
         ContractDto contractDto = new ContractDto();
         contractDto.setDeadline(bid.getDeliver_date());
         contractDto.setPrice(bid.getPrice());
+        contractDto.setProject(projectMapper.toDto(bid.getProject()));
+        contractDto.setFreelancer(freelancerMapper.toDto(bid.getFreelancer()));
 
         //TODO مدري وش التايب
-        contractDto.setType(null);
+        // 0 - in-progress
+        // 1 - completed
+        contractDto.setType("0");
         ContractDto contact = contractService.save(contractDto);
-        bid.setContract(contractMapper.toEntity(contact));
-        bidRepository.save(bid);
+//        bid.setContract(contractMapper.toEntity(contact));
+//        bidRepository.save(bid);
         projectService.setStatus(bid.getProject().getId());
         return contact;
 

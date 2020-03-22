@@ -4,8 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Data
@@ -17,6 +16,12 @@ public class Contract extends BaseEntity{
     private LocalDateTime deadline;
     private String type;
 
+    @OneToOne
+    @JoinColumn(name = "project_id", referencedColumnName = "id")
+    private Project project;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Freelancer freelancer;
 
 //bidId
     //employerId

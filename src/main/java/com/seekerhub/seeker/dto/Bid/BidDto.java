@@ -33,5 +33,5 @@ public class BidDto {
     private String  status;
     private ProjectBasicDto project;
     private FreelancerBasicDto freelancer;
-    private ContractDto contract;
+//    private ContractDto contract;
 }

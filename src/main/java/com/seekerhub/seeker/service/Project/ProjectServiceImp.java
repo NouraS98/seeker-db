@@ -22,6 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -196,5 +197,21 @@ public class ProjectServiceImp implements ProjectService{
     }
 
 
+   // delete not yest
+   public void deleteProjectById(long id){
+       if (!projectRepository.existsById(id))
+           throw new GenericException("Project doesn't exist");
 
+       projectRepository.deleteById(id);
+
+    }
+  //  extend not yet
+   public void extendProjectById(long id, LocalDateTime localDateTime){
+       if (!projectRepository.existsById(id))
+           throw new GenericException("Project doesn't exist");
+
+       Project project = projectRepository.getOne(id);
+       project.setExpiry_date(localDateTime);
+       projectRepository.save(project);
+    }
 }
