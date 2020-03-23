@@ -38,6 +38,7 @@ public class ProjectDto {
     private Set<SkillDto> skills = new HashSet<>();
     private CategoryBasicDto category;
     private String status;
+    private LocalDateTime createdAt;
     private List<StorageDocumentDto> attachments = new ArrayList<>();
 
 }
