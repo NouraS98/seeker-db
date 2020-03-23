@@ -77,13 +77,12 @@ import java.util.List;
     }
 
     //extend
-    @PostMapping("extend")
+    @PutMapping("extend")
     public void extendExpiryDate(@RequestBody ProjectDto projectDto) {
 
         projectService.extendProjectById( projectDto.getId(),projectDto.getExpiry_date());
 
     }
-
 
 
     }
