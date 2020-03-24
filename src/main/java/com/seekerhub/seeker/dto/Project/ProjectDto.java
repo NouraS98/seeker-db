@@ -39,6 +39,7 @@ public class ProjectDto {
     private CategoryBasicDto category;
     //0 pending , //1 on progress, //2 completed
     private String status;
+    private LocalDateTime createdAt;
     private List<StorageDocumentDto> attachments = new ArrayList<>();
 
 }
