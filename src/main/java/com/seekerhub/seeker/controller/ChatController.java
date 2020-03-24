@@ -1,8 +1,7 @@
 package com.seekerhub.seeker.controller;
 
-import com.seekerhub.seeker.dto.Category.CategoryDto;
 import com.seekerhub.seeker.dto.Chat.ChatDto;
-import com.seekerhub.seeker.service.Category.CategoryService;
+import com.seekerhub.seeker.dto.user.UserDto;
 import com.seekerhub.seeker.service.Chat.ChatService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -28,6 +27,11 @@ public class ChatController {
     @GetMapping("{id}")
     public ResponseEntity findById(@PathVariable long id) {
         return ResponseEntity.ok(chatService.findById(id));
+    }
+
+    @GetMapping("user/{user_id}")
+    public ResponseEntity findByfirstUserOrLastUser(@PathVariable Long user_id){
+        return ResponseEntity.ok(chatService.findByFirstUserOrLastUser(user_id));
     }
 
 }

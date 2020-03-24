@@ -1,12 +1,14 @@
 package com.seekerhub.seeker.service.Chat;
 
 import com.seekerhub.seeker.dto.Chat.ChatDto;
+import com.seekerhub.seeker.dto.user.UserDto;
 import com.seekerhub.seeker.entity.Chat;
 import com.seekerhub.seeker.mapper.ChatMapper;
 import com.seekerhub.seeker.repository.ChatRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -34,4 +36,11 @@ public class ChatServiceImp implements ChatService {
     public ChatDto findById(long id) {
         return chatMapper.toDto(chatRepository.getOne(id));
     }
+
+    @Override
+    public List<ChatDto> findByFirstUserOrLastUser(Long user_id) {
+
+        return chatMapper.toDtos(chatRepository.findByFirstUserIdOrSecondUserId(user_id,user_id));
+    }
+
 }
