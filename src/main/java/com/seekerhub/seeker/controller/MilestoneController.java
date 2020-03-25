@@ -32,6 +32,11 @@ public class MilestoneController {
         return ResponseEntity.ok(milestoneService.findById(id));
     }
 
+    @DeleteMapping("delete/{id}")
+    public void deleteById(@PathVariable long id){
+
+       milestoneService.deleteById(id);
+    }
 
 
 }

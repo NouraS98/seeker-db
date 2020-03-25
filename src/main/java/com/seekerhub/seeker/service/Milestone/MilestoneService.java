@@ -9,5 +9,6 @@ public interface MilestoneService {
     MilestoneDto save(MilestoneDto milestoneDto);
     List<MilestoneDto> findAll();
     MilestoneDto findById(long id);
+    void deleteById(long id);
 
 }
