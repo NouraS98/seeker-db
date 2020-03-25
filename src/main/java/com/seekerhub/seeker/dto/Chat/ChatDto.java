@@ -13,9 +13,13 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+
+
 public class ChatDto {
     private long id;
     private UserDto firstUser;
     private UserDto secondUser;
     private List<ChatMessageDto> chatMessages = new ArrayList<>();
+
+
 }

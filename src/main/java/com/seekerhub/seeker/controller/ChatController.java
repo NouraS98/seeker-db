@@ -34,4 +34,9 @@ public class ChatController {
         return ResponseEntity.ok(chatService.findByFirstUserOrLastUser(user_id));
     }
 
+    @GetMapping("user/{user1_id}/{user2_id}")
+    public ResponseEntity findByFirstUserAndLastUser(@PathVariable Long user1_id , @PathVariable Long user2_id){
+        return ResponseEntity.ok(chatService.findByFirstUserAndLastUser(user1_id,user2_id));
+    }
+
 }

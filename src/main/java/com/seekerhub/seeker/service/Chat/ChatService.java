@@ -10,4 +10,5 @@ public interface ChatService {
     List<ChatDto> findAll();
     ChatDto findById(long id);
     List<ChatDto> findByFirstUserOrLastUser(Long user_id);
+    ChatDto findByFirstUserAndLastUser(Long user1_id , Long user2_id);
 }

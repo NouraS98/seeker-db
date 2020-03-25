@@ -9,4 +9,5 @@ public interface ChatMessageService {
     ChatMessageDto save(ChatMessageDto chatMessageDto);
     List<ChatMessageDto> findAll();
     ChatMessageDto findById(long id);
+
 }
