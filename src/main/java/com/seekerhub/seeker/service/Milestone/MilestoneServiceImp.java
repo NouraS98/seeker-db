@@ -3,7 +3,9 @@ package com.seekerhub.seeker.service.Milestone;
 import com.seekerhub.seeker.dto.Milestone.MilestoneDto;
 import com.seekerhub.seeker.dto.Skill.SkillDto;
 import com.seekerhub.seeker.entity.Milestone;
+import com.seekerhub.seeker.entity.Project;
 import com.seekerhub.seeker.entity.Skill;
+import com.seekerhub.seeker.exception.GenericException;
 import com.seekerhub.seeker.mapper.MilestoneMapper;
 import com.seekerhub.seeker.mapper.SkillMapper;
 import com.seekerhub.seeker.repository.MilestoneRepository;
@@ -36,6 +38,15 @@ public class MilestoneServiceImp implements MilestoneService {
     @Override
     public MilestoneDto findById(long id) {
         return milestoneMapper.toDto(milestoneRepository.getOne(id));
+    }
+
+    @Override
+    public void deleteById(long id) {
+
+        if(!milestoneRepository.existsById(id))
+            throw new GenericException("The milestone was not found");
+
+       milestoneRepository.deleteById(id);
     }
 
 
