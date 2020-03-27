@@ -11,4 +11,9 @@ public interface EmployerService {
     EmployerDto findById(long id);
 EmployerDto getByUserId(long user_id);
 
+    //For rating
+    List<Integer>  getEmployerRatingValues(long id);
+    float getTotalEmployerRatings(long id);
+    void setRatingValues(long id, int num_of_ratings, int response_time, int total_on_time_payment, float total_emp_ratings);
+
 }

@@ -1,6 +1,7 @@
 package com.seekerhub.seeker.controller;
 
 
+import com.seekerhub.seeker.dto.user.UserDto;
 import com.seekerhub.seeker.dto.user.UserSocialMediaDto;
 import com.seekerhub.seeker.service.UserSocialMedia.UserSociaMediaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +31,9 @@ public class UserSocialMediaController {
         return ResponseEntity.ok(userSociaMediaService.findById(id));
     }
 
-
-
+//    @PostMapping("twitter/{twitter}/{user}")
+//    public void setTwitter(@PathVariable String twitter, @RequestBody UserDto user){
+//        userSociaMediaService.setTwitter(twitter, user);
+//    }
 
 }

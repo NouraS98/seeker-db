@@ -1,6 +1,7 @@
 package com.seekerhub.seeker.dto.Freelancer;
 
 import com.seekerhub.seeker.dto.Bid.BidDto;
+import com.seekerhub.seeker.dto.Skill.SkillDto;
 import com.seekerhub.seeker.dto.user.UserDto;
 import com.seekerhub.seeker.entity.Employer;
 import com.seekerhub.seeker.entity.Freelancer;
@@ -13,7 +14,9 @@ import lombok.NoArgsConstructor;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Data
 @Builder
@@ -29,4 +32,6 @@ public class FreelancerDto {
     private int num_of_hired_projects;
     private List<BidDto> bids = new ArrayList<>();
   //  private Employer employer;
+    //todo new - just added 14 march
+  private Set<SkillDto> skills = new HashSet<>();
 }

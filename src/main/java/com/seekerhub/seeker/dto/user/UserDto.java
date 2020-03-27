@@ -3,6 +3,7 @@ package com.seekerhub.seeker.dto.user;
 import com.seekerhub.seeker.dto.role.RoleDto;
 import com.seekerhub.seeker.dto.storageDocument.StorageDocumentDto;
 import com.seekerhub.seeker.enums.RoleEnum;
+import javassist.bytecode.ByteArray;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -27,5 +28,10 @@ public class UserDto implements Serializable {
     private String rating;
     private RoleEnum current_type;
     private StorageDocumentDto avatar;
+    private String twitter;
+    private String facebook;
+    private String linkedIn;
+    private String education;
+    private byte[] img;
 
 }

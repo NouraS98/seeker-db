@@ -8,7 +8,9 @@ import org.hibernate.annotations.CascadeType;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 
 @Data
@@ -33,6 +35,15 @@ public class Freelancer extends BaseEntity {
 
     )
     private List<Bid> bids = new ArrayList<>();
+    //todo new - just added 14 march
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "skill_freelancer" , joinColumns = { // هنا اسوي جوين لل٢ تيبلز عشان العلاقة ماني تو ماني
+            @JoinColumn(name = "freelancer_id" , referencedColumnName = "id") // التيبل الاول
+    }, inverseJoinColumns = {
+            @JoinColumn(name = "skill_id" , referencedColumnName = "id") // التيبل الثاني
+    })
+    private Set<Skill> skills = new HashSet<>();
+
 
 
 }

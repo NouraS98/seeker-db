@@ -11,6 +11,7 @@ import javax.persistence.Entity;
 @NoArgsConstructor
 @AllArgsConstructor
 public class EmployerRating extends BaseEntity{
+    //to use
     private int communication;
     private int professionalism;
     private int onTimePayment;

@@ -22,7 +22,7 @@ public class SkillController {
         return ResponseEntity.ok(skillService.save(skillDto));
     }
 
-    @GetMapping
+    @GetMapping("find-all")
     public ResponseEntity findAll() {
         return ResponseEntity.ok(skillService.findAll());
     }

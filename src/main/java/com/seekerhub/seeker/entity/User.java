@@ -1,10 +1,12 @@
 package com.seekerhub.seeker.entity;
 
 import com.seekerhub.seeker.enums.RoleEnum;
+import javassist.bytecode.ByteArray;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -50,6 +52,9 @@ public class User extends BaseEntity {
     @OneToOne(mappedBy = "user")
     private Freelancer freelancer;
 
+    @OneToOne
+    private UserSocialMedia userSocialMedia;
+
     @Column(columnDefinition = "boolean default true")
     private boolean enabled;
 
@@ -60,4 +65,13 @@ public class User extends BaseEntity {
     @JoinColumn(name = "avatar_id", referencedColumnName = "id")
     private StorageDocument avatar;
 
+//    @ColumnDefault("NA")
+    private String twitter;
+
+    private String facebook;
+
+    private String linkedIn;
+
+    private String education;
+    private byte[] img;
 }

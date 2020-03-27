@@ -27,4 +27,6 @@ public class EmployerDto {
     // حطيت بيسك مو البروجكت العادية عشان مايسوي لوب ومب لازم دايم احط كذا
     private List<ProjectBasicDto> projects = new ArrayList<>();
 
+    private float total_emp_ratings;
+
 }
