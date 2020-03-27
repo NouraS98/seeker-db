@@ -4,6 +4,7 @@ import com.seekerhub.seeker.dto.Employer.EmployerDto;
 import com.seekerhub.seeker.dto.Freelancer.FreelancerDto;
 import com.seekerhub.seeker.dto.user.UserDto;
 import com.seekerhub.seeker.dto.user.UserForRegisterDto;
+import com.seekerhub.seeker.entity.Project;
 import com.seekerhub.seeker.entity.StorageDocument;
 import com.seekerhub.seeker.entity.User;
 import com.seekerhub.seeker.enums.RoleEnum;
@@ -145,5 +146,16 @@ public class UserServiceImpl implements UserService {
             e.printStackTrace();
             throw new GenericException("Could not upload avatar");
         }
+    }
+
+    @Override
+    public void resetUserPassword(Long id, String password) {
+        if (!userRepository.existsById(id))
+            throw new GenericException("User doesn't exist");
+
+        User user = userRepository.getOne(id);
+        user.setPassword(bCryptPasswordEncoder.encode(password));
+       // user.setPassword(password);
+        userRepository.save(user);
     }
 }

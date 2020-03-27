@@ -1,6 +1,8 @@
 package com.seekerhub.seeker.controller;
 
+import com.seekerhub.seeker.dto.Project.ProjectDto;
 import com.seekerhub.seeker.dto.user.UserDto;
+import com.seekerhub.seeker.dto.user.UserForRegisterDto;
 import com.seekerhub.seeker.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -44,4 +46,14 @@ public class UserController {
     public void uploadAvatar(@RequestPart("avatar")MultipartFile file) {
         userService.uploadAvatar(file);
     }
+
+//new
+    @PostMapping("reset")
+    public void resetPassword(@RequestBody UserForRegisterDto user) {
+
+        userService.resetUserPassword(user.getId(),user.getPassword());
+
+    }
+
+
 }

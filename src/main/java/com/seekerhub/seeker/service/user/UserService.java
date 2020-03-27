@@ -17,5 +17,6 @@ public interface UserService<list> {
     UserDto register(UserForRegisterDto userDto);
 
     void uploadAvatar(MultipartFile file);
+   void resetUserPassword(Long id, String password);
 
 }
