@@ -20,7 +20,7 @@ public class Employer extends BaseEntity {
     private int  response_time;
     private int  num_of_posted_Projects;
     private int  total_on_time_payment;
-
+@ColumnDefault("0")
     private float total_emp_ratings;
 
     //ADD total emp rating.
