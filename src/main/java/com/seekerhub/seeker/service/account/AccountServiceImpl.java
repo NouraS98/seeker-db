@@ -6,6 +6,7 @@ import com.seekerhub.seeker.dto.user.UserForRegisterDto;
 import com.seekerhub.seeker.exception.ApiError;
 import com.seekerhub.seeker.exception.GenericException;
 import com.seekerhub.seeker.repository.UserRepository;
+import com.seekerhub.seeker.security.PrivateKeyImpl;
 import com.seekerhub.seeker.service.security.token.TokenService;
 import com.seekerhub.seeker.service.security.user.SecurityService;
 import com.seekerhub.seeker.service.user.UserService;
@@ -40,6 +41,12 @@ public class AccountServiceImpl implements AccountService {
     @Override
     @Transactional
     public String login(LoginDto loginDto) {
+
+        try {
+            loginDto.setPassword(PrivateKeyImpl.decryptMessage(loginDto.getPassword()));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         final Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         loginDto.getEmail(),

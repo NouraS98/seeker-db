@@ -15,6 +15,7 @@ import com.seekerhub.seeker.exception.GenericException;
 import com.seekerhub.seeker.mapper.UserMapper;
 import com.seekerhub.seeker.model.FileUpload;
 import com.seekerhub.seeker.repository.UserRepository;
+import com.seekerhub.seeker.security.PrivateKeyImpl;
 import com.seekerhub.seeker.service.employer.EmployerService;
 import com.seekerhub.seeker.service.freelancer.FreelancerService;
 import com.seekerhub.seeker.service.upload.UploadService;
@@ -94,6 +95,11 @@ public class UserServiceImpl implements UserService {
     @Transactional
     public UserDto register(UserForRegisterDto userDto) {
 
+        try {
+            userDto.setPassword(PrivateKeyImpl.decryptMessage(userDto.getPassword()));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         List<ApiError> errors = new ArrayList<>();
 
         if (userRepository.existsByUsername(userDto.getUsername()))
@@ -104,6 +110,8 @@ public class UserServiceImpl implements UserService {
 
         if (errors.size() > 0)
             throw new GenericException("User already exists", errors);
+
+
 
         User user = userMapper.toEntity(userDto);
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
