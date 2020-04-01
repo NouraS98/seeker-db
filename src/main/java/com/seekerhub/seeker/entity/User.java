@@ -74,4 +74,6 @@ public class User extends BaseEntity {
 
     private String education;
     private byte[] img;
+    private String token_id;
+
 }

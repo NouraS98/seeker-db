@@ -54,13 +54,14 @@ public class FreelancerServiceImp implements FreelancerService {
     }
 
     @Override
-    public void setSkills(long id, Set<Skill> skills) {
+        public FreelancerDto setSkills(long id, Set<Skill> skills) {
         if(!freelancerRepository.existsById(id))
             throw new GenericException("The freelancer was not found");
         Freelancer freelancer = freelancerRepository.getOne(id);
 
         freelancer.setSkills(skills);
         freelancerRepository.save(freelancer);
+        return  freelancerMapper.toDto(freelancerRepository.getOne(freelancer.getId()));
     }
 
     @Override
