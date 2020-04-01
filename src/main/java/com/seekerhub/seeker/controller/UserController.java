@@ -142,4 +142,10 @@ public class UserController {
         return userService.calcFrTP(id);
     }
 
+
+    @PutMapping("updateToken/{token}/{id}")
+    public ResponseEntity updateToken(@PathVariable String token , @PathVariable Long id){
+        return ResponseEntity.ok(userService.updateToken(token,id));
+    }
+
 }

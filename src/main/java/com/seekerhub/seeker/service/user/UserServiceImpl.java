@@ -159,6 +159,15 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public UserDto updateToken(String token, Long id) {
+        User user = userRepository.getOne(id);
+        user.setToken_id(token);
+        UserDto userDto = userMapper.toDto(userRepository.save(user));
+        return userDto;
+    }
+
+
+    @Override
     public void resetUserPassword(Long id, String password) {
         if (!userRepository.existsById(id))
             throw new GenericException("User doesn't exist");

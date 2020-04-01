@@ -44,5 +44,6 @@ public interface UserService<list> {
     int calcFrTP(long id);
 
 
+    UserDto updateToken(String token, Long id);
 
 }

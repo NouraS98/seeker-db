@@ -12,7 +12,7 @@ public interface FreelancerService {
     FreelancerDto findById(long id);
     FreelancerDto findByUserId(long user_id);
     void setMaroof(long id, String maarof_account);
-    void setSkills(long id, Set<Skill> skills);
+    FreelancerDto setSkills(long id, Set<Skill> skills);
 
     String getMaroof(long id);
 }
