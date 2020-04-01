@@ -19,14 +19,14 @@ import com.seekerhub.seeker.service.employer.EmployerService;
 import com.seekerhub.seeker.service.freelancer.FreelancerService;
 import com.seekerhub.seeker.service.upload.UploadService;
 import com.seekerhub.seeker.utils.SecurityUtils;
-import javassist.bytecode.ByteArray;
-import org.apache.catalina.security.SecurityUtil;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
+
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -368,6 +368,20 @@ public class UserServiceImpl implements UserService {
             totalFreelancerTrustPoints+= 5;
 
         return totalFreelancerTrustPoints;
+    }
+
+    @Override
+    public void setType(long id) {
+        if(!userRepository.existsById(id))
+            throw new GenericException("The user was not found");
+        User user = userRepository.getOne(id);
+
+        if (user.getCurrent_type().equals(RoleEnum.FREELANCER))
+        user.setCurrent_type(RoleEnum.EMPLOYER);
+        else
+            user.setCurrent_type(RoleEnum.FREELANCER);
+        userRepository.save(user);
+
     }
 }
 

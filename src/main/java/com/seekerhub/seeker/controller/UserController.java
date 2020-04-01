@@ -142,4 +142,9 @@ public class UserController {
         return userService.calcFrTP(id);
     }
 
+    @PostMapping ("chanageType")
+    public void setType(@RequestBody UserDto userDto){
+        userService.setType(userDto.getId());
+    }
+
 }

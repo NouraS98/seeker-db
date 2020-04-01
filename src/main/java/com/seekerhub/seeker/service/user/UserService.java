@@ -44,5 +44,5 @@ public interface UserService<list> {
     int calcFrTP(long id);
 
 
-
+    void setType(long id);
 }
