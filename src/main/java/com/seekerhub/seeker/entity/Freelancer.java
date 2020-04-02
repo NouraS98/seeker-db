@@ -35,6 +35,7 @@ public class Freelancer extends BaseEntity {
 
     )
     private List<Bid> bids = new ArrayList<>();
+
     //todo new - just added 14 march
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "skill_freelancer" , joinColumns = { // هنا اسوي جوين لل٢ تيبلز عشان العلاقة ماني تو ماني

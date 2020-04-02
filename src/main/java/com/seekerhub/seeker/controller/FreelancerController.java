@@ -45,14 +45,15 @@ public class FreelancerController {
         freelancerService.setMaroof(id,maarof_account);
     }
 
-    @PostMapping("skills/{id}/{skills}")
-    public void setFreelancerSkills(@PathVariable long id, @PathVariable Set<Skill> skills){
-        freelancerService.setSkills(id, skills);
+    @PostMapping("skills/{id}")
+    public ResponseEntity setFreelancerSkills(@PathVariable long id, @RequestBody Set<Skill> skills){
+       return ResponseEntity.ok(freelancerService.setSkills(id, skills)) ;
     }
 
     @GetMapping("get_maarof/{id}")
     public String getMaroof(@PathVariable long id){
         return freelancerService.getMaroof(id);
     }
+
 
 }
