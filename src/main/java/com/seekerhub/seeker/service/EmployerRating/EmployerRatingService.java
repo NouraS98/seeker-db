@@ -10,4 +10,6 @@ public interface EmployerRatingService {
     List<EmployerRatingDto> findAll();
     EmployerRatingDto findById(long id);
 
+    double calculateTotalRatings(long employer_id);
+
 }

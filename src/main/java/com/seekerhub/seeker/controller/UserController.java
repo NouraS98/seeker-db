@@ -72,9 +72,9 @@ public class UserController {
         userService.setNationalId(id,national_id);
     }
 
-    @PostMapping("twitter/{id}/{twitter}")
-    public void setTwitter(@PathVariable long id, @PathVariable String twitter){
-        userService.setTwitter(id, twitter);
+    @PostMapping("twitter")
+    public void setTwitter(@RequestBody UserDto userDto){
+        userService.setTwitter(userDto.getId(), userDto.getTwitter());
     }
 
     @PostMapping("linkedin/{id}/{linkedIn}")

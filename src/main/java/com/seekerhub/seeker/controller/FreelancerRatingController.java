@@ -17,7 +17,7 @@ public class FreelancerRatingController {
     @Autowired
     private FreelancerRatingService freelancerRatingService;
 
-    @PostMapping
+    @PostMapping("add")
     public ResponseEntity create(@RequestBody FreelancerRatingDto freelancerRatingDto) {
         return ResponseEntity.ok(freelancerRatingService.save(freelancerRatingDto));
     }

@@ -44,6 +44,9 @@ public class Freelancer extends BaseEntity {
     })
     private Set<Skill> skills = new HashSet<>();
 
+//    @OneToOne(mappedBy = "freelancer")
+//    private EmployerRating employerRating;
+
 
 
 }

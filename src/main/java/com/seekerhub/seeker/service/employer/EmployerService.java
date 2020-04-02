@@ -15,5 +15,5 @@ EmployerDto getByUserId(long user_id);
     List<Integer>  getEmployerRatingValues(long id);
     float getTotalEmployerRatings(long id);
     void setRatingValues(long id, int num_of_ratings, int response_time, int total_on_time_payment, float total_emp_ratings);
-
+    void setNumOfProjects(long id, int num_of_posted_Projects);
 }
