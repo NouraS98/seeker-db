@@ -21,7 +21,7 @@ public class FreelancerController {
         return ResponseEntity.ok(freelancerService.save(freelancerDto));
     }
 
-    @GetMapping
+    @GetMapping("findAll")
     public ResponseEntity findAll() {
         return ResponseEntity.ok(freelancerService.findAll());
     }

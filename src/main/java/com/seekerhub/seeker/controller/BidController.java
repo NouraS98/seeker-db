@@ -51,4 +51,11 @@ public class BidController {
         return ResponseEntity.ok(bidService.findBidByStatus(status));
     }
 
+
+
+    //delete bid
+    @DeleteMapping("{id}")
+    public void deleteBidById(@PathVariable long id){ bidService.deleteBidById(id);
+    }
+
 }

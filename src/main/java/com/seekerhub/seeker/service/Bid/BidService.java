@@ -18,4 +18,5 @@ public interface BidService {
     //todo new hind 1
     List<BidDto> findBidByStatus(String status);
 
+    void deleteBidById(long id);
 }
