@@ -400,6 +400,14 @@ public class UserServiceImpl implements UserService {
         userRepository.save(user);
 
     }
+
+    @Override
+    public void deleteUserById(long id) {
+        if (!userRepository.existsById(id))
+            throw new GenericException("User doesn't exist");
+
+        userRepository.deleteById(id);
+    }
 }
 
 

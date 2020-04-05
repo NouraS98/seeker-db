@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -31,7 +30,8 @@ public class Freelancer extends BaseEntity {
 
     @OneToMany(
             mappedBy = "freelancer",
-            fetch = FetchType.LAZY
+            fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL
 
     )
     private List<Bid> bids = new ArrayList<>();

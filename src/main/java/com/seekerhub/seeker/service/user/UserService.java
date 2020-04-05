@@ -47,4 +47,6 @@ public interface UserService<list> {
     UserDto updateToken(String token, Long id);
 
     void setType(long id);
+
+    void deleteUserById(long id);
 }

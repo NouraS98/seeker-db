@@ -153,4 +153,13 @@ public class UserController {
         return ResponseEntity.ok(userService.updateToken(token,id));
     }
 
+    @DeleteMapping("{id}")
+    public void deleteUserById(@PathVariable long id){
+        userService.deleteUserById(id);
+    }
+
+
+
+
+
 }
