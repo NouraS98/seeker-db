@@ -66,7 +66,7 @@ public class FreelancerController {
                );
     }
 
-    @PutMapping("hired_projs/{id}")
+    @PostMapping("hired_projs/{id}")
     public void setNumberOfWorkedOnProjects(@PathVariable long id){
         freelancerService.setNumberOfWorkedOnProjects(id);
     }
