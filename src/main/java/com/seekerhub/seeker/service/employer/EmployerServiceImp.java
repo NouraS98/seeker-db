@@ -91,12 +91,12 @@ public class EmployerServiceImp implements EmployerService {
     }
 
     @Override
-    public void setNumOfProjects(long id, int num_of_posted_Projects) {
+    public void setNumberOfPostedProjects(long id) {
         if(!employerRepository.existsById(id))
             throw new GenericException("The employer was not found");
         Employer employer = employerRepository.getOne(id);
 
-        employer.setNum_of_posted_Projects(num_of_posted_Projects);
+        employer.setNum_of_posted_Projects(employer.getNum_of_posted_Projects()+1);
         employerRepository.save(employer);
     }
 }

@@ -63,28 +63,35 @@ public class UserController {
 
     //New by hind
     @PostMapping("phone_number/{id}/{phone_number}")
-    public void setPhone(@PathVariable long id, @PathVariable String phone_number){
-        userService.setPhone(id,phone_number);
+    public ResponseEntity setPhone(@PathVariable long id, @PathVariable String phone_number){
+//        userService.setPhone(id,phone_number);
+        return ResponseEntity.ok(userService.setPhone(id,phone_number));
     }
 
     @PostMapping("national_id/{id}/{national_id}")
-    public void setNationalId(@PathVariable long id, @PathVariable String national_id){
-        userService.setNationalId(id,national_id);
+    public ResponseEntity setNationalId(@PathVariable long id, @PathVariable String national_id){
+//        userService.setNationalId(id,national_id);
+        return ResponseEntity.ok(userService.setNationalId(id, national_id));
     }
 
-    @PostMapping("twitter")
-    public void setTwitter(@RequestBody UserDto userDto){
-        userService.setTwitter(userDto.getId(), userDto.getTwitter());
+    @PostMapping("twitter/{id}/{twitter}")
+    public ResponseEntity setTwitter(@PathVariable long id, @PathVariable String twitter){
+//        userService.setTwitter(userDto.getId(), userDto.getTwitter());
+        return ResponseEntity.ok(userService.setTwitter(id, twitter));
     }
 
     @PostMapping("linkedin/{id}/{linkedIn}")
-    public void setLinkedIn(@PathVariable long id, @PathVariable String linkedIn){
-       userService.setLinkedin(id, linkedIn);
+    public ResponseEntity setLinkedIn(@PathVariable long id, @PathVariable String linkedIn){
+//       userService.setLinkedin(id, linkedIn);
+        return ResponseEntity.ok(userService.setLinkedin(id, linkedIn));
+
     }
 
     @PostMapping("facebook/{id}/{facebook}")
-    public void setFacebook(@PathVariable long id, @PathVariable String facebook){
-        userService.setFacebook(id, facebook);
+    public ResponseEntity setFacebook(@PathVariable long id, @PathVariable String facebook){
+//        userService.setFacebook(id, facebook);
+        return ResponseEntity.ok(userService.setFacebook(id, facebook));
+
     }
 
     @GetMapping("get_linkedin/{id}")
@@ -103,8 +110,10 @@ public class UserController {
     }
 
     @PostMapping("education/{id}/{education}")
-    public void setEducation(@PathVariable long id, @PathVariable String education){
-        userService.setEducation(id, education);
+    public ResponseEntity setEducation(@PathVariable long id, @PathVariable String education){
+//        userService.setEducation(id, education);
+        return ResponseEntity.ok(userService.setEducation(id, education));
+
     }
 
     @GetMapping("get_education/{id}")

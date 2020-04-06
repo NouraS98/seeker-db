@@ -11,4 +11,6 @@ public interface FreelancerRatingService {
     List<FreelancerRatingDto> findAll();
     FreelancerRatingDto findById(long id);
 
+    double calculateTotalRatings(long freelancer_id);
+
 }

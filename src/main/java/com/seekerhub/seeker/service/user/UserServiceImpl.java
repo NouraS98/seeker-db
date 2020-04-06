@@ -181,54 +181,65 @@ public class UserServiceImpl implements UserService {
 
     //New by hind.
     @Override
-    public void setPhone(long id, String phone_number) {
+    public UserDto setPhone(long id, String phone_number) {
         if(!userRepository.existsById(id))
             throw new GenericException("The user was not found");
         User user = userRepository.getOne(id);
 
         user.setPhone_number(phone_number);
         userRepository.save(user);
+
+        return userMapper.toDto(user);
+
     }
 
 
     @Override
-    public void setNationalId(long id, String national_id) {
+    public UserDto setNationalId(long id, String national_id) {
         if(!userRepository.existsById(id))
             throw new GenericException("The user was not found");
         User user = userRepository.getOne(id);
 
         user.setNational_id(national_id);
         userRepository.save(user);
+
+        return userMapper.toDto(user);
     }
 
     @Override
-    public void setTwitter(long id, String twitter) {
+    public UserDto setTwitter(long id, String twitter) {
         if(!userRepository.existsById(id))
             throw new GenericException("The user was not found");
         User user = userRepository.getOne(id);
 
         user.setTwitter(twitter);
         userRepository.save(user);
+
+        return userMapper.toDto(user);
     }
 
     @Override
-    public void setLinkedin(long id, String linkedIn) {
+    public UserDto setLinkedin(long id, String linkedIn) {
         if(!userRepository.existsById(id))
             throw new GenericException("The user was not found");
         User user = userRepository.getOne(id);
 
         user.setLinkedIn(linkedIn);
         userRepository.save(user);
+
+        return userMapper.toDto(user);
     }
 
     @Override
-    public void setFacebook(long id, String facebook) {
+    public UserDto setFacebook(long id, String facebook) {
         if(!userRepository.existsById(id))
             throw new GenericException("The user was not found");
         User user = userRepository.getOne(id);
 
         user.setFacebook(facebook);
         userRepository.save(user);
+
+        return userMapper.toDto(user);
     }
 
     @Override
@@ -261,13 +272,15 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void setEducation(long id, String education) {
+    public UserDto setEducation(long id, String education) {
         if(!userRepository.existsById(id))
             throw new GenericException("The user was not found");
         User user = userRepository.getOne(id);
 
         user.setEducation(education);
         userRepository.save(user);
+
+        return userMapper.toDto(user);
     }
 
     @Override
