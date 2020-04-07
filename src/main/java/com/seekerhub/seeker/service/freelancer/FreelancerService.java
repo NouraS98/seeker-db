@@ -1,8 +1,11 @@
 package com.seekerhub.seeker.service.freelancer;
 
+import com.amazonaws.services.transfer.model.ListedServer;
 import com.seekerhub.seeker.dto.Freelancer.FreelancerDto;
+import com.seekerhub.seeker.entity.Freelancer;
 import com.seekerhub.seeker.entity.Skill;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
@@ -15,4 +18,6 @@ public interface FreelancerService {
     FreelancerDto setSkills(long id, Set<Skill> skills);
 
     String getMaroof(long id);
+    Set<FreelancerDto> findBySkills(Collection<Skill> skills);
+
 }

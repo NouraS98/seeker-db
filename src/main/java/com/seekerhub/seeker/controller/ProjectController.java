@@ -83,6 +83,10 @@ import java.util.List;
         projectService.extendProjectById( projectDto.getId(),projectDto.getExpiry_date());
 
     }
+    @GetMapping("date/findProjectsBeforeExpiry")
+    public ResponseEntity findProjectsBeforeExpiry(){
+           return ResponseEntity.ok(projectService.findProjectsBeforeExpiry());
+    }
 
 
     }

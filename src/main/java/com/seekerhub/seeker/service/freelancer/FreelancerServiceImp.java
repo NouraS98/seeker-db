@@ -10,8 +10,8 @@ import com.seekerhub.seeker.repository.FreelancerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class FreelancerServiceImp implements FreelancerService {
@@ -73,4 +73,17 @@ public class FreelancerServiceImp implements FreelancerService {
         return freelancer.getMaarof_account();
 
     }
+
+    @Override
+    public Set<FreelancerDto> findBySkills(Collection<Skill> skills) {
+        Collection<Long> ids = new ArrayList<>();
+        skills.forEach(skill -> {
+            ids.add(skill.getId());
+        });
+        List<Freelancer> freelancers = freelancerRepository.findAllBySkillsIdIn(ids);
+        Set<FreelancerDto> freelancerDtos = freelancerMapper.toDtos(freelancers).stream().collect(Collectors.toSet());
+        return freelancerDtos;
+    }
+
+
 }

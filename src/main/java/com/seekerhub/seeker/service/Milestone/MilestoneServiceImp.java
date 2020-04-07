@@ -10,10 +10,15 @@ import com.seekerhub.seeker.mapper.MilestoneMapper;
 import com.seekerhub.seeker.mapper.SkillMapper;
 import com.seekerhub.seeker.repository.MilestoneRepository;
 import com.seekerhub.seeker.repository.SkillRepository;
+import com.seekerhub.seeker.service.PushNotificationsService;
 import com.seekerhub.seeker.service.Skill.SkillService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -22,6 +27,10 @@ public class MilestoneServiceImp implements MilestoneService {
     MilestoneRepository milestoneRepository;
     @Autowired
     MilestoneMapper milestoneMapper;
+
+
+    @Autowired
+    PushNotificationsService pushNotificationsService;
 
     @Override
     public MilestoneDto save(MilestoneDto milestoneDto) {
@@ -48,6 +57,20 @@ public class MilestoneServiceImp implements MilestoneService {
 
        milestoneRepository.deleteById(id);
     }
+
+    @Override
+    public List<Milestone> findMilestoneBeforeByDeadline() {
+        LocalDate localDate = LocalDate.now().plusDays(1);
+        LocalDateTime startOfDay = localDate.atStartOfDay();
+        LocalDateTime endOfDay = localDate.plusDays(1).atStartOfDay();
+        List<Milestone> milestones = milestoneRepository.findByDeadlineAndStatus(startOfDay,endOfDay,"0");
+
+        return milestones;
+    }
+
+
+
+
 
 
 }

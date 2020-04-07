@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Set;
 
 @RestController
@@ -55,5 +56,9 @@ public class FreelancerController {
         return freelancerService.getMaroof(id);
     }
 
+    @PostMapping("findbySkills")
+    public ResponseEntity findFreelancerBySkills(@RequestBody List<Skill> skill ){
+        return ResponseEntity.ok(freelancerService.findBySkills(skill));
+    }
 
 }

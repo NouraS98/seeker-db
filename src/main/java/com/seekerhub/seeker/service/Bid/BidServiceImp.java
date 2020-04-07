@@ -11,6 +11,7 @@ import com.seekerhub.seeker.mapper.ProjectMapper;
 import com.seekerhub.seeker.repository.BidRepository;
 import com.seekerhub.seeker.service.Contract.ContractService;
 import com.seekerhub.seeker.service.Project.ProjectService;
+import com.seekerhub.seeker.service.PushNotificationsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -39,6 +40,8 @@ public class BidServiceImp implements BidService {
     @Autowired
     FreelancerMapper freelancerMapper;
 
+    @Autowired
+    PushNotificationsService pushNotificationsService;
 
     @Override
     public BidDto save(BidDto bidDto) {
@@ -78,8 +81,11 @@ public class BidServiceImp implements BidService {
         contractDto.setType("0");
         ContractDto contact = contractService.save(contractDto);
 //        bid.setContract(contractMapper.toEntity(contact));
-//        bidRepository.save(bid);
+
+        bidRepository.save(bid);
+
         projectService.setStatus(bid.getProject().getId());
+        pushNotificationsService.sendAcceptBidNotification(bidMapper.toDto(bid),bid.getFreelancer().getUser().getToken_id());
         return contact;
 
     }

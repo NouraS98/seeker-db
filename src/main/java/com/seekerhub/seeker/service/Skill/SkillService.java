@@ -10,4 +10,5 @@ public interface SkillService {
     List<SkillDto> findAll();
     SkillDto findById(long id);
 
+
 }

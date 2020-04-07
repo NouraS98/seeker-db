@@ -32,6 +32,8 @@ public interface ProjectService {
     //extend
     void extendProjectById(long id, LocalDateTime localDateTime);
 
+    List<ProjectDto> findProjectsBeforeExpiry();
+
 
 
 

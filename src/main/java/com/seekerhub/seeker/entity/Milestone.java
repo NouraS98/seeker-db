@@ -19,7 +19,6 @@ public class Milestone extends BaseEntity{
     private String status;
     private LocalDateTime deadline;
     private String description;
-    //projectId
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name= "project_id", referencedColumnName ="id")

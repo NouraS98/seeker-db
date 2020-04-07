@@ -12,6 +12,9 @@ import com.seekerhub.seeker.mapper.*;
 import com.seekerhub.seeker.model.FileUpload;
 import com.seekerhub.seeker.repository.FreelancerRepository;
 import com.seekerhub.seeker.repository.ProjectRepository;
+import com.seekerhub.seeker.service.PushNotificationsService;
+import com.seekerhub.seeker.service.freelancer.FreelancerService;
+import com.seekerhub.seeker.service.freelancer.FreelancerServiceImp;
 import com.seekerhub.seeker.service.upload.UploadService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,10 +25,11 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.Instant;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.time.ZoneId;
+import java.util.*;
 
 @Service
 public class ProjectServiceImp implements ProjectService{
@@ -51,6 +55,14 @@ public class ProjectServiceImp implements ProjectService{
     @Autowired
     private UploadService uploadService;
 
+
+    @Autowired
+    PushNotificationsService pushNotificationsService;
+
+    @Autowired
+    FreelancerService freelancerService;
+
+
     @Override
     public ProjectDto save(ProjectDto projectDto) {
         Project project = projectMapper.toEntity(projectDto);
@@ -58,6 +70,11 @@ public class ProjectServiceImp implements ProjectService{
         project.getMilestones().forEach(project::addMilestone);
 
         Project projectToSave = projectRepository.save(project);
+        Set<FreelancerDto> freelancerDtoSet = freelancerService.findBySkills(projectToSave.getSkills());
+        freelancerDtoSet.forEach( freelancerDto -> {
+                    pushNotificationsService.sendToFreelancerAccordingToSkills(projectDto,freelancerDto.getUser().getToken_id());
+                }
+        );
         return projectMapper.toDto(projectToSave);
     }
 
@@ -214,4 +231,23 @@ public class ProjectServiceImp implements ProjectService{
        project.setExpiry_date(localDateTime);
        projectRepository.save(project);
     }
+
+    @Override
+    public List<ProjectDto> findProjectsBeforeExpiry() {
+
+       LocalDate localDate = LocalDate.now().plusDays(1);
+       LocalDateTime startOfDay = localDate.atStartOfDay();
+        LocalDateTime endOfDay = localDate.plusDays(1).atStartOfDay();
+        List<Project> projects = projectRepository.findByExpiry_dateAndStatus(startOfDay,endOfDay,"0");
+
+        return projectMapper.toDtos(projects);
+    }
+
+    public LocalDateTime convertDateToLocaleDateTime(Date date){
+
+        LocalDateTime localDateTime = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+     return localDateTime;
+    }
+
+
 }
