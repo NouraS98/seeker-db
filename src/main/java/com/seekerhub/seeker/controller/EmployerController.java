@@ -67,9 +67,10 @@ public class EmployerController {
                 employerDto.getTotal_emp_ratings());
     }
 
-    @PostMapping("posted_projs/{id}/{num_of_posted_Projects}")
-    public void setNumberOfPostedProjects(@PathVariable long id, @PathVariable int num_of_posted_Projects){
-        employerService.setNumOfProjects(id, num_of_posted_Projects);
+
+    @PostMapping("posted_projects/{id}")
+    public void setNumOfPostedProjects(@PathVariable long id){
+        employerService.setNumberOfPostedProjects(id);
     }
 
 

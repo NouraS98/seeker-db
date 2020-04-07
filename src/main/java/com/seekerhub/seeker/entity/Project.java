@@ -27,7 +27,8 @@ public class Project extends BaseEntity {
     private String status;
 
     @OneToMany(
-            mappedBy = "project"
+            mappedBy = "project",
+            cascade = CascadeType.ALL
     )
     private List<Bid> bids = new ArrayList<>();
 

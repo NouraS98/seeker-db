@@ -1,6 +1,7 @@
 package com.seekerhub.seeker.service.freelancer;
 
 import com.seekerhub.seeker.dto.Freelancer.FreelancerDto;
+import com.seekerhub.seeker.entity.Employer;
 import com.seekerhub.seeker.entity.Freelancer;
 import com.seekerhub.seeker.entity.Skill;
 import com.seekerhub.seeker.entity.User;
@@ -44,13 +45,15 @@ public class FreelancerServiceImp implements FreelancerService {
     }
 
     @Override
-    public void setMaroof(long id, String maarof_account) {
+    public FreelancerDto setMaroof(long id, String maarof_account) {
         if(!freelancerRepository.existsById(id))
             throw new GenericException("The freelancer was not found");
         Freelancer freelancer = freelancerRepository.getOne(id);
 
         freelancer.setMaarof_account(maarof_account);
         freelancerRepository.save(freelancer);
+
+        return freelancerMapper.toDto(freelancer);
     }
 
     @Override
@@ -72,6 +75,41 @@ public class FreelancerServiceImp implements FreelancerService {
 
         return freelancer.getMaarof_account();
 
+    }
+
+    @Override
+    public FreelancerDto getRatingValues(long id) {
+
+        if (!freelancerRepository.existsById(id))
+            throw new GenericException("The freelancer was not found");
+        Freelancer freelancer = freelancerRepository.getOne(id);
+
+
+
+        return null;
+    }
+
+    @Override
+    public void setRatingValues(long id, int num_of_ratings, int total_quality_of_work, int total_response_time) {
+        if (!freelancerRepository.existsById(id))
+            throw new GenericException("The freelancer was not found");
+
+        Freelancer freelancer = freelancerRepository.getOne(id);
+        freelancer.setNum_of_ratings(num_of_ratings);
+        freelancer.setTotal_quality_of_work(total_quality_of_work);
+        freelancer.setTotal_response_time(total_response_time);
+
+        freelancerRepository.save(freelancer);
+    }
+
+    @Override
+    public void setNumberOfWorkedOnProjects(long id) {
+        if(!freelancerRepository.existsById(id))
+            throw new GenericException("The freelancer was not found");
+        Freelancer freelancer = freelancerRepository.getOne(id);
+
+        freelancer.setNum_of_hired_projects(freelancer.getNum_of_hired_projects()+1);
+        freelancerRepository.save(freelancer);
     }
 
     @Override

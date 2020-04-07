@@ -3,6 +3,8 @@ package com.seekerhub.seeker.controller;
 
 import com.seekerhub.seeker.dto.FreelancerRating.FreelancerRatingDto;
 import com.seekerhub.seeker.dto.Skill.SkillDto;
+import com.seekerhub.seeker.entity.Employer;
+import com.seekerhub.seeker.entity.Freelancer;
 import com.seekerhub.seeker.service.FreelancerRating.FreelancerRatingService;
 import com.seekerhub.seeker.service.Skill.SkillService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +34,10 @@ public class FreelancerRatingController {
         return ResponseEntity.ok(freelancerRatingService.findById(id));
     }
 
+    @PostMapping("total")
+    public double calculateFreelancerTotalRatings(@RequestBody Freelancer freelancer){
+        return freelancerRatingService.calculateTotalRatings(freelancer.getId());
+    }
 
 
 

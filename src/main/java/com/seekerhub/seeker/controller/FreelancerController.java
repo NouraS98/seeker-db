@@ -1,6 +1,7 @@
 package com.seekerhub.seeker.controller;
 
 
+import com.seekerhub.seeker.dto.Employer.EmployerDto;
 import com.seekerhub.seeker.dto.Freelancer.FreelancerDto;
 import com.seekerhub.seeker.entity.Skill;
 import com.seekerhub.seeker.service.freelancer.FreelancerService;
@@ -42,8 +43,9 @@ public class FreelancerController {
 
     //New by hind
     @PostMapping("maarof_account/{id}/{maarof_account}")
-    public void setMaroof(@PathVariable long id, @PathVariable String maarof_account){
-        freelancerService.setMaroof(id,maarof_account);
+    public ResponseEntity setMaroof(@PathVariable long id, @PathVariable String maarof_account){
+//        freelancerService.setMaroof(id,maarof_account);
+        return ResponseEntity.ok(freelancerService.setMaroof(id,maarof_account));
     }
 
     @PostMapping("skills/{id}")
@@ -56,6 +58,19 @@ public class FreelancerController {
         return freelancerService.getMaroof(id);
     }
 
+    @PutMapping("rating_values")
+    public void setFreelancerRatingValues(@RequestBody FreelancerDto freelancerDto){
+        freelancerService.setRatingValues(freelancerDto.getId(),
+                freelancerDto.getNum_of_ratings(),
+                freelancerDto.getTotal_quality_of_work(),
+                freelancerDto.getTotal_response_time()
+               );
+    }
+
+    @PostMapping("hired_projs/{id}")
+    public void setNumberOfWorkedOnProjects(@PathVariable long id){
+        freelancerService.setNumberOfWorkedOnProjects(id);
+    }
     @PostMapping("findbySkills")
     public ResponseEntity findFreelancerBySkills(@RequestBody List<Skill> skill ){
         return ResponseEntity.ok(freelancerService.findBySkills(skill));

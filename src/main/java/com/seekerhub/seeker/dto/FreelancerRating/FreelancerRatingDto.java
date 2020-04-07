@@ -1,5 +1,7 @@
 package com.seekerhub.seeker.dto.FreelancerRating;
 
+import com.seekerhub.seeker.dto.Employer.EmployerDto;
+import com.seekerhub.seeker.dto.Freelancer.FreelancerDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,5 +18,7 @@ public class FreelancerRatingDto {
     private int onTime;
     private int qualityOfWork;
     private int onBudget;
+    private FreelancerDto freelancer;
+    private EmployerDto employer;
 
 }

@@ -14,10 +14,15 @@ public interface FreelancerService {
     List<FreelancerDto> findAll();
     FreelancerDto findById(long id);
     FreelancerDto findByUserId(long user_id);
-    void setMaroof(long id, String maarof_account);
+    FreelancerDto setMaroof(long id, String maarof_account);
     FreelancerDto setSkills(long id, Set<Skill> skills);
 
     String getMaroof(long id);
+    FreelancerDto getRatingValues(long id);
+
+    void setRatingValues(long id, int num_of_ratings, int total_quality_of_work, int total_response_time);
+    void setNumberOfWorkedOnProjects(long id);
+
     Set<FreelancerDto> findBySkills(Collection<Skill> skills);
 
 }

@@ -61,7 +61,7 @@ public class EmployerRatingServiceImp implements EmployerRatingService {
         // to calculate his/her total ratings
         for (int i =0; i< myEmployerRatings.size(); i++){
 
-            totalEmployerRatings+=  ( (double)(myEmployerRatings.get(i).getCommunication() + (double)myEmployerRatings.get(i).getOnTimePayment() + (double)myEmployerRatings.get(i).getProfessionalism()) / 3.0);
+            totalEmployerRatings+=  ( ((double)myEmployerRatings.get(i).getCommunication() + (double)myEmployerRatings.get(i).getOnTimePayment() + (double)myEmployerRatings.get(i).getProfessionalism()) / 3.0);
 
         }
 

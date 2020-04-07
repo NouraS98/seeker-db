@@ -20,13 +20,13 @@ public interface UserService<list> {
     void uploadAvatar(MultipartFile file);
    void resetUserPassword(Long id, String password);
 
-    void setPhone(long id, String phone_number);
-    void setNationalId(long id, String national_id);
+    UserDto setPhone(long id, String phone_number);
+    UserDto setNationalId(long id, String national_id);
 
-    void setTwitter(long id, String twitter);
-    void setLinkedin(long id, String linkedIn);
-    void setFacebook(long id, String facebook);
-    void setEducation(long id, String education);
+    UserDto setTwitter(long id, String twitter);
+    UserDto setLinkedin(long id, String linkedIn);
+    UserDto setFacebook(long id, String facebook);
+    UserDto setEducation(long id, String education);
 
     String getLinkedInById(long id);
     String getTwitterById(long id);
@@ -47,4 +47,6 @@ public interface UserService<list> {
     UserDto updateToken(String token, Long id);
 
     void setType(long id);
+
+    void deleteUserById(long id);
 }

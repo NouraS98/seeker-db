@@ -46,10 +46,10 @@ public class User extends BaseEntity {
     private String rating;
 
     // TODO: User Entity: cascade = CascadeType.REMOVE
-    @OneToOne(mappedBy = "user")
+    @OneToOne(mappedBy = "user", cascade = REMOVE)
     private Employer employer;
 
-    @OneToOne(mappedBy = "user")
+    @OneToOne(mappedBy = "user", cascade = REMOVE)
     private Freelancer freelancer;
 
     @OneToOne
