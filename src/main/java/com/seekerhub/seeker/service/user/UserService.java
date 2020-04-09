@@ -1,5 +1,6 @@
 package com.seekerhub.seeker.service.user;
 
+import com.seekerhub.seeker.dto.storageDocument.StorageDocumentDto;
 import com.seekerhub.seeker.dto.user.UserDto;
 import com.seekerhub.seeker.dto.user.UserForRegisterDto;
 import javassist.bytecode.ByteArray;
@@ -17,7 +18,7 @@ public interface UserService<list> {
 
     UserDto register(UserForRegisterDto userDto);
 
-    void uploadAvatar(MultipartFile file);
+    StorageDocumentDto uploadAvatar(Long id,MultipartFile file);
    void resetUserPassword(Long id, String password);
 
     UserDto setPhone(long id, String phone_number);

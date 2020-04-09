@@ -2,6 +2,7 @@ package com.seekerhub.seeker.service.user;
 
 import com.seekerhub.seeker.dto.Employer.EmployerDto;
 import com.seekerhub.seeker.dto.Freelancer.FreelancerDto;
+import com.seekerhub.seeker.dto.storageDocument.StorageDocumentDto;
 import com.seekerhub.seeker.dto.user.UserDto;
 import com.seekerhub.seeker.dto.user.UserForRegisterDto;
 import com.seekerhub.seeker.entity.Project;
@@ -12,6 +13,7 @@ import com.seekerhub.seeker.enums.RoleEnum;
 import com.seekerhub.seeker.enums.StorageEnum;
 import com.seekerhub.seeker.exception.ApiError;
 import com.seekerhub.seeker.exception.GenericException;
+import com.seekerhub.seeker.mapper.StorageMapper;
 import com.seekerhub.seeker.mapper.UserMapper;
 import com.seekerhub.seeker.model.FileUpload;
 import com.seekerhub.seeker.repository.UserRepository;
@@ -31,6 +33,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -57,6 +60,12 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UploadService uploadService;
+
+    @Autowired
+    StorageMapper storageMapper;
+
+    @Value("${app.file-upload.avatar}")
+    private String ATTACHMENT_SPACE_NAME;
 
     @Override
     public UserDto save(UserDto userdto) {
@@ -128,27 +137,57 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void uploadAvatar(MultipartFile file) {
+    public StorageDocumentDto uploadAvatar(Long id,MultipartFile file) {
+//
+//        // Getting current logged in user
+//        String email = SecurityUtils.getCurrentUserLogin();
+//        User user = userRepository.findByEmail(email);
+//
+//        // Setting key for storage: avatar + user Id to make it unique for every user
+//        String key = "avatar_" + user.getId();
+//
+//        // Setting file name
+//        String name = file.getOriginalFilename();
+//
+//        try {
+//            // Upload avatar to Avatar Space (DigitalOcean)
+//            FileUpload fileUpload = uploadService.upload(AVATAR_SPACE_NAME, key, file);
+//
+//            // If upload is successful, then create new Storage Document Entity with type AVATAR and set user avatar and save user.
+//            if (fileUpload.isSuccess()) {
+//                StorageDocument storageDocument = new StorageDocument(key, name, StorageEnum.AVATAR, fileUpload.getUrl(), file.getContentType());
+//                user.setAvatar(storageDocument);
+//                userRepository.save(user);
+//            } else {
+//                throw new GenericException("Could not upload avatar");
+//            }
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//            throw new GenericException("Could not upload avatar");
+//        }
+        if (!userRepository.existsById(id))
+            throw new GenericException("User doesn't exist");
 
-        // Getting current logged in user
-        String email = SecurityUtils.getCurrentUserLogin();
-        User user = userRepository.findByEmail(email);
+        User user = userRepository.getOne(id);
 
-        // Setting key for storage: avatar + user Id to make it unique for every user
-        String key = "avatar_" + user.getId();
+        String key = "avatar_" + user.getId() + "_" + (new Date().getTime());
+
 
         // Setting file name
         String name = file.getOriginalFilename();
 
         try {
             // Upload avatar to Avatar Space (DigitalOcean)
-            FileUpload fileUpload = uploadService.upload(AVATAR_SPACE_NAME, key, file);
+            FileUpload fileUpload = uploadService.upload(ATTACHMENT_SPACE_NAME, key, file);
 
             // If upload is successful, then create new Storage Document Entity with type AVATAR and set user avatar and save user.
             if (fileUpload.isSuccess()) {
                 StorageDocument storageDocument = new StorageDocument(key, name, StorageEnum.AVATAR, fileUpload.getUrl(), file.getContentType());
                 user.setAvatar(storageDocument);
-                userRepository.save(user);
+
+                User userToSave  = userRepository.save(user);
+
+                return storageMapper.toDto(userToSave.getAvatar());
             } else {
                 throw new GenericException("Could not upload avatar");
             }

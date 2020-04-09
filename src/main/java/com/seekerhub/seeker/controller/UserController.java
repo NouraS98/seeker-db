@@ -45,10 +45,8 @@ public class UserController {
         return ResponseEntity.ok(userService.findByEmail(email));
     }
 
-    @PostMapping("/avatar")
-    public void uploadAvatar(@RequestPart("avatar")MultipartFile file) {
-        userService.uploadAvatar(file);
-    }
+
+
 
 //new
     @PostMapping("reset")
@@ -162,13 +160,18 @@ public class UserController {
         return ResponseEntity.ok(userService.updateToken(token,id));
     }
 
-    @DeleteMapping("{id}")
+    //غيرت الباث لان كان نفس فايند يوزر كذا اذا جيت ادور يوزر بيحذفه
+    @DeleteMapping("deleteUser/{id}")
     public void deleteUserById(@PathVariable long id){
         userService.deleteUserById(id);
     }
 
 
 
+    @PostMapping("avatar/{id}")
+    public ResponseEntity uploadAvatar(@PathVariable Long id,@RequestPart("avatar")MultipartFile file) {
+        return ResponseEntity.ok(userService.uploadAvatar(id,file));
+    }
 
 
 }
