@@ -27,4 +27,7 @@ public interface ProjectRepository extends JpaRepository<Project, Long> {
 
     @Query("SELECT p FROM Project p WHERE p.expiry_date between :from and :to and status = :status ")
     List<Project> findByExpiry_dateAndStatus(@Param("from") LocalDateTime fromDate, @Param("to") LocalDateTime toDate, @Param("status") String status);
+
+
+
 }

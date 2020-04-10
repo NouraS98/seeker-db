@@ -34,4 +34,6 @@ public class FreelancerDto {
   //  private Employer employer;
     //todo new - just added 14 march
   private Set<SkillDto> skills = new HashSet<>();
+    private double credit;
+
 }

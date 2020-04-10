@@ -70,6 +70,7 @@ public class BidServiceImp implements BidService {
         Bid bid = bidRepository.getOne(id);
         bid.setStatus("accepted");
         ContractDto contractDto = new ContractDto();
+
         contractDto.setDeadline(bid.getDeliver_date());
         contractDto.setPrice(bid.getPrice());
         contractDto.setProject(projectMapper.toDto(bid.getProject()));

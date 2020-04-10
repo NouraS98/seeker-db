@@ -36,4 +36,9 @@ public class ContractController {
         return ResponseEntity.ok(contractService.findById(id));
     }
 
+    @GetMapping("project/{id}")
+    public  ResponseEntity findByFreelancerId(@PathVariable long id){
+        return ResponseEntity.ok(contractService.findByFreelancerId(id));
+    }
+
 }

@@ -12,6 +12,8 @@ public interface MilestoneService {
     MilestoneDto findById(long id);
     void deleteById(long id);
     List<Milestone> findMilestoneBeforeByDeadline();
+    MilestoneDto updateStatus(long id);
+
 
 
 }

@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -27,6 +28,9 @@ public class Freelancer extends BaseEntity {
     private int total_response_time;
     private int total_quality_of_work;
     private int num_of_hired_projects;
+
+    @ColumnDefault("0.0")
+    private double credit;
 
     @OneToMany(
             mappedBy = "freelancer",

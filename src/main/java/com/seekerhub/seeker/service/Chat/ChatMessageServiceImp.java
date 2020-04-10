@@ -49,7 +49,7 @@ public class ChatMessageServiceImp implements ChatMessageService {
         UserDto userDto = userService.findById(user_id);
         token = userDto.getToken_id();
 
-        pushNotificationsService.sendToAUser(chatMessageDto , token );
+        pushNotificationsService.sendToAUser(chatMessageMapper.toDto(chatToSave) , token );
         return chatMessageMapper.toDto(chatToSave);
     }
 

@@ -72,7 +72,7 @@ public class ProjectServiceImp implements ProjectService{
         Project projectToSave = projectRepository.save(project);
         Set<FreelancerDto> freelancerDtoSet = freelancerService.findBySkills(projectToSave.getSkills());
         freelancerDtoSet.forEach( freelancerDto -> {
-                    pushNotificationsService.sendToFreelancerAccordingToSkills(projectDto,freelancerDto.getUser().getToken_id());
+                    pushNotificationsService.sendToFreelancerAccordingToSkills(projectMapper.toDto(projectToSave),freelancerDto.getUser().getToken_id());
                 }
         );
         return projectMapper.toDto(projectToSave);
@@ -135,6 +135,15 @@ public class ProjectServiceImp implements ProjectService{
      Project project = projectRepository.getOne(id);
      project.setStatus("1");
      projectRepository.save(project);
+    }
+
+    @Override
+    public void setStatus(long id, String status) {
+        if(!projectRepository.existsById(id))
+            throw new GenericException("The project was not found");
+        Project project = projectRepository.getOne(id);
+        project.setStatus(status);
+        projectRepository.save(project);
     }
 
     @Override

@@ -138,33 +138,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public StorageDocumentDto uploadAvatar(Long id,MultipartFile file) {
-//
-//        // Getting current logged in user
-//        String email = SecurityUtils.getCurrentUserLogin();
-//        User user = userRepository.findByEmail(email);
-//
-//        // Setting key for storage: avatar + user Id to make it unique for every user
-//        String key = "avatar_" + user.getId();
-//
-//        // Setting file name
-//        String name = file.getOriginalFilename();
-//
-//        try {
-//            // Upload avatar to Avatar Space (DigitalOcean)
-//            FileUpload fileUpload = uploadService.upload(AVATAR_SPACE_NAME, key, file);
-//
-//            // If upload is successful, then create new Storage Document Entity with type AVATAR and set user avatar and save user.
-//            if (fileUpload.isSuccess()) {
-//                StorageDocument storageDocument = new StorageDocument(key, name, StorageEnum.AVATAR, fileUpload.getUrl(), file.getContentType());
-//                user.setAvatar(storageDocument);
-//                userRepository.save(user);
-//            } else {
-//                throw new GenericException("Could not upload avatar");
-//            }
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//            throw new GenericException("Could not upload avatar");
-//        }
+
         if (!userRepository.existsById(id))
             throw new GenericException("User doesn't exist");
 

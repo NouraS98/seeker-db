@@ -14,6 +14,7 @@ public interface ProjectService {
     List<ProjectDto> findAll();
     ProjectDto findById(long id);
     void setStatus(long id);
+    void setStatus(long id, String status);
     List<ProjectDto> findByStatusAndEmployer(String status, EmployerDto employer);
     //todo new 1 hind
     List<ProjectDto> findByStatus(String status);
