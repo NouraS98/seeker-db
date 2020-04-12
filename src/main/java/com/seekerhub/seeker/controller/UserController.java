@@ -173,5 +173,14 @@ public class UserController {
         return ResponseEntity.ok(userService.uploadAvatar(id,file));
     }
 
+    @PostMapping("add-work/{id}")
+    public ResponseEntity uploadSampleWork(@PathVariable Long id, @RequestPart("attachment") MultipartFile attachment) {
+        return ResponseEntity.ok(userService.addSampleWork(id,attachment));
+    }
+
+    @DeleteMapping("{id}/delete-work/{attachmentId}")
+    public void deleteAttachmentById(@PathVariable long id, @PathVariable long attachmentId){
+        userService.deleteSampleWorkById(id,attachmentId);
+    }
 
 }

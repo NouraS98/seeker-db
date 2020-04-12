@@ -9,7 +9,9 @@ import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import static javax.persistence.CascadeType.*;
@@ -76,4 +78,6 @@ public class User extends BaseEntity {
     private byte[] img;
     private String token_id;
 
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<StorageDocument> sampleWorks = new ArrayList<>();
 }

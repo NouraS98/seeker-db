@@ -2,6 +2,7 @@ package com.seekerhub.seeker.dto.user;
 
 import com.seekerhub.seeker.dto.role.RoleDto;
 import com.seekerhub.seeker.dto.storageDocument.StorageDocumentDto;
+import com.seekerhub.seeker.entity.StorageDocument;
 import com.seekerhub.seeker.enums.RoleEnum;
 import javassist.bytecode.ByteArray;
 import lombok.AllArgsConstructor;
@@ -10,6 +11,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 //JSON هذا اللي بيرجع
@@ -34,5 +37,6 @@ public class UserDto implements Serializable {
     private String education;
     private byte[] img;
    private String token_id;
+    private List<StorageDocument> sampleWorks = new ArrayList<>();
 
 }

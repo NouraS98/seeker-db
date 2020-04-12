@@ -19,7 +19,13 @@ public interface UserService<list> {
     UserDto register(UserForRegisterDto userDto);
 
     StorageDocumentDto uploadAvatar(Long id,MultipartFile file);
-   void resetUserPassword(Long id, String password);
+
+    void deleteSampleWorkById(long id, long attachmentId);
+
+    StorageDocumentDto addSampleWork(long id, MultipartFile attachment);
+
+
+    void resetUserPassword(Long id, String password);
 
     UserDto setPhone(long id, String phone_number);
     UserDto setNationalId(long id, String national_id);

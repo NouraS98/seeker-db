@@ -35,6 +35,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -64,8 +65,8 @@ public class UserServiceImpl implements UserService {
     @Autowired
     StorageMapper storageMapper;
 
-    @Value("${app.file-upload.avatar}")
-    private String ATTACHMENT_SPACE_NAME;
+    @Value("${app.file-upload.work}")
+    private  String WORK_SPACE_NAME;
 
     @Override
     public UserDto save(UserDto userdto) {
@@ -152,7 +153,7 @@ public class UserServiceImpl implements UserService {
 
         try {
             // Upload avatar to Avatar Space (DigitalOcean)
-            FileUpload fileUpload = uploadService.upload(ATTACHMENT_SPACE_NAME, key, file);
+            FileUpload fileUpload = uploadService.upload(AVATAR_SPACE_NAME, key, file);
 
             // If upload is successful, then create new Storage Document Entity with type AVATAR and set user avatar and save user.
             if (fileUpload.isSuccess()) {
@@ -169,6 +170,54 @@ public class UserServiceImpl implements UserService {
             e.printStackTrace();
             throw new GenericException("Could not upload avatar");
         }
+    }
+
+    @Override
+    public void deleteSampleWorkById(long id, long attachmentId) {
+        if (!userRepository.existsById(id))
+            throw new GenericException("user doesn't exist");
+
+        User user = userRepository.getOne(id);
+        Optional<StorageDocument> storageDocumentToDelete = user.getSampleWorks().stream().filter(storageDocument -> storageDocument.getId() == attachmentId).findFirst();
+        if (!storageDocumentToDelete.isPresent()) {
+            throw new GenericException("Attachment doesn't exist");
+        }
+        user.getSampleWorks().remove(storageDocumentToDelete.get());
+        userRepository.save(user);
+    }
+
+    @Override
+    public StorageDocumentDto addSampleWork(long id, MultipartFile file) {
+        if (!userRepository.existsById(id))
+            throw new GenericException("user doesn't exist");
+
+        User user = userRepository.getOne(id);
+
+        String key = "work_" + user.getId() + "_" + (new Date().getTime());
+
+
+        // Setting file name
+        String name = file.getOriginalFilename();
+
+        try {
+            // Upload avatar to Avatar Space (DigitalOcean)
+            FileUpload fileUpload = uploadService.upload(WORK_SPACE_NAME, key, file);
+
+            // If upload is successful, then create new Storage Document Entity with type AVATAR and set user avatar and save user.
+            if (fileUpload.isSuccess()) {
+                StorageDocument storageDocument = new StorageDocument(key, name, StorageEnum.WORK, fileUpload.getUrl(), file.getContentType());
+                user.getSampleWorks().add(storageDocument);
+                User userToSave = userRepository.save(user);
+
+                return storageMapper.toDto(userToSave.getSampleWorks().get(userToSave.getSampleWorks().size() - 1));
+            } else {
+                throw new GenericException("Could not upload work");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            throw new GenericException("Could not upload work");
+        }
+
     }
 
     @Override
