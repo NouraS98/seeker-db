@@ -2,14 +2,20 @@ package com.seekerhub.seeker.service.Bid;
 
 import com.seekerhub.seeker.dto.Bid.BidDto;
 import com.seekerhub.seeker.dto.Contract.ContractDto;
+import com.seekerhub.seeker.dto.Milestone.MilestoneDto;
+import com.seekerhub.seeker.dto.Project.ProjectBasicDto;
 import com.seekerhub.seeker.entity.Bid;
+import com.seekerhub.seeker.entity.Milestone;
+import com.seekerhub.seeker.entity.Project;
 import com.seekerhub.seeker.exception.GenericException;
 import com.seekerhub.seeker.mapper.BidMapper;
 import com.seekerhub.seeker.mapper.ContractMapper;
 import com.seekerhub.seeker.mapper.FreelancerMapper;
 import com.seekerhub.seeker.mapper.ProjectMapper;
 import com.seekerhub.seeker.repository.BidRepository;
+import com.seekerhub.seeker.repository.ProjectRepository;
 import com.seekerhub.seeker.service.Contract.ContractService;
+import com.seekerhub.seeker.service.Milestone.MilestoneService;
 import com.seekerhub.seeker.service.Project.ProjectService;
 import com.seekerhub.seeker.service.PushNotificationsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +35,9 @@ public class BidServiceImp implements BidService {
     ContractService contractService;
 
     @Autowired
+    MilestoneService milestoneService;
+
+    @Autowired
     ContractMapper contractMapper;
 
     @Autowired
@@ -39,6 +48,10 @@ public class BidServiceImp implements BidService {
 
     @Autowired
     FreelancerMapper freelancerMapper;
+
+    @Autowired
+    ProjectRepository projectRepository;
+
 
     @Autowired
     PushNotificationsService pushNotificationsService;
@@ -76,17 +89,39 @@ public class BidServiceImp implements BidService {
         contractDto.setProject(projectMapper.toDto(bid.getProject()));
         contractDto.setFreelancer(freelancerMapper.toDto(bid.getFreelancer()));
 
+
+
+
+
+
         //TODO مدري وش التايب
         // 0 - in-progress
         // 1 - completed
         contractDto.setType("0");
         ContractDto contact = contractService.save(contractDto);
+
+
+        MilestoneDto  milestoneDto = new MilestoneDto();
+        milestoneDto.setAmount(bid.getPrice());
+        milestoneDto.setDeadline(bid.getDeliver_date());
+        milestoneDto.setDescription(bid.getProject().getTitle());
+        milestoneDto.setStatus("0");
+
+        ProjectBasicDto project = new ProjectBasicDto();
+        project.setId(bid.getProject().getId());
+        project.setDescription(bid.getProject().getDescription());
+        project.setTitle(bid.getProject().getTitle());
+        project.setType(bid.getProject().getType());
+
+        milestoneDto.setProject(project);
+
+        MilestoneDto milestoneDto1 = milestoneService.save(milestoneDto);
 //        bid.setContract(contractMapper.toEntity(contact));
 
         bidRepository.save(bid);
 
         projectService.setStatus(bid.getProject().getId());
-        pushNotificationsService.sendAcceptBidNotification(bidMapper.toDto(bid),bid.getFreelancer().getUser().getToken_id());
+//        pushNotificationsService.sendAcceptBidNotification(bidMapper.toDto(bid),bid.getFreelancer().getUser().getToken_id());
         return contact;
 
     }
