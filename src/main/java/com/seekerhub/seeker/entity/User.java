@@ -78,6 +78,10 @@ public class User extends BaseEntity {
     private byte[] img;
     private String token_id;
 
+    @ColumnDefault("false")
+   private boolean verified;
+
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<StorageDocument> sampleWorks = new ArrayList<>();
+
 }

@@ -5,10 +5,7 @@ import com.seekerhub.seeker.dto.Freelancer.FreelancerDto;
 import com.seekerhub.seeker.dto.storageDocument.StorageDocumentDto;
 import com.seekerhub.seeker.dto.user.UserDto;
 import com.seekerhub.seeker.dto.user.UserForRegisterDto;
-import com.seekerhub.seeker.entity.Project;
-import com.seekerhub.seeker.entity.StorageDocument;
-import com.seekerhub.seeker.entity.User;
-import com.seekerhub.seeker.entity.UserSocialMedia;
+import com.seekerhub.seeker.entity.*;
 import com.seekerhub.seeker.enums.RoleEnum;
 import com.seekerhub.seeker.enums.StorageEnum;
 import com.seekerhub.seeker.exception.ApiError;
@@ -17,7 +14,9 @@ import com.seekerhub.seeker.mapper.StorageMapper;
 import com.seekerhub.seeker.mapper.UserMapper;
 import com.seekerhub.seeker.model.FileUpload;
 import com.seekerhub.seeker.repository.UserRepository;
+import com.seekerhub.seeker.repository.VerificationTokenRepository;
 import com.seekerhub.seeker.security.PrivateKeyImpl;
+import com.seekerhub.seeker.service.Email.EmailService;
 import com.seekerhub.seeker.service.employer.EmployerService;
 import com.seekerhub.seeker.service.freelancer.FreelancerService;
 import com.seekerhub.seeker.service.upload.UploadService;
@@ -25,6 +24,7 @@ import com.seekerhub.seeker.utils.SecurityUtils;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -32,10 +32,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -64,6 +61,12 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     StorageMapper storageMapper;
+
+    @Autowired
+    VerificationTokenRepository verificationTokenRepository;
+
+    @Autowired
+    EmailService emailService;
 
     @Value("${app.file-upload.work}")
     private  String WORK_SPACE_NAME;
@@ -98,7 +101,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDto findByEmail(String email) {
-        return userMapper.toDto(userRepository.findByEmail(email));
+        return userMapper.toDto(userRepository.findByEmailIgnoreCase(email));
     }
 
     @Override
@@ -133,6 +136,7 @@ public class UserServiceImpl implements UserService {
 
         FreelancerDto freelancerDto = FreelancerDto.builder().user(userMapper.toDto(userToSave)).build();
         freelancerService.save(freelancerDto);
+        sendEmailVerificationToken(userToSave.getUsername());
 
         return userMapper.toDto(userToSave);
     }
@@ -482,6 +486,41 @@ public class UserServiceImpl implements UserService {
             throw new GenericException("User doesn't exist");
 
         userRepository.deleteById(id);
+    }
+
+    @Override
+    public void createVerificationToken(User user, String token, TokenTypeE type) {
+        VerificationToken verificationToken = new VerificationToken(user, token, type);
+        verificationTokenRepository.save(verificationToken);
+    }
+
+    @Override
+    public VerificationToken getVerificationToken(String verificationToken) {
+        return verificationTokenRepository.findByToken(verificationToken);
+    }
+    @Override
+    public void verifyEmail(long id) {
+        Optional<User> user = userRepository.findById(id);
+        user.ifPresent(existUser -> {
+            existUser.setVerified(true);
+            userRepository.save(existUser);
+        });
+    }
+    @Override
+    public void sendEmailVerificationToken(String username) {
+        User user = userRepository.findByUsername(username);
+        String token = UUID.randomUUID().toString();
+        createVerificationToken(user, token, TokenTypeE.VERIFY_EMAIL);
+
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setTo(user.getEmail());
+        message.setSubject("Verify Your Email");
+        message.setText("Dear " + user.getUsername() + ",\n" +
+                "You can verify your email by clicking on the following link, please be aware that this link only " +
+                "valid for 24 hours: \n" + "http://localhost:8080/email-verify?token=" +token
+        );
+
+        emailService.sendEmail(message);
     }
 }
 

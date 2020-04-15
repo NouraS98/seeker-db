@@ -3,6 +3,7 @@ package com.seekerhub.seeker.service.account;
 import com.seekerhub.seeker.dto.login.LoginDto;
 import com.seekerhub.seeker.dto.user.UserDto;
 import com.seekerhub.seeker.dto.user.UserForRegisterDto;
+import com.seekerhub.seeker.entity.User;
 import com.seekerhub.seeker.exception.ApiError;
 import com.seekerhub.seeker.exception.GenericException;
 import com.seekerhub.seeker.repository.UserRepository;
@@ -35,6 +36,7 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public UserDto register(UserForRegisterDto userForRegisterDto) {
+
         return userService.register(userForRegisterDto);
     }
 
@@ -56,6 +58,13 @@ public class AccountServiceImpl implements AccountService {
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
         UserDetails userDetails = userDetailsService.loadUserByUsername(loginDto.getEmail());
+        if(userDetails!=null){
+            UserDto user = userService.findByEmail(loginDto.getEmail());
+            if(!user.isVerified()){
+                throw new GenericException("Email is not verified");
+            }
+
+        }
         final String token = tokenService.generateToken(userDetails);
         return token;
     }

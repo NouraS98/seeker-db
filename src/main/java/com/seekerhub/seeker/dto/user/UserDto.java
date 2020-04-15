@@ -38,5 +38,6 @@ public class UserDto implements Serializable {
     private byte[] img;
    private String token_id;
     private List<StorageDocument> sampleWorks = new ArrayList<>();
+    private boolean verified;
 
 }

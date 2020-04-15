@@ -22,7 +22,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Override
     @Transactional(readOnly = true)
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepository.findByEmail(username);
+        User user = userRepository.findByEmailIgnoreCase(username);
 
         HashSet<GrantedAuthority> grantedAuthorities = new HashSet<GrantedAuthority>();
         user.getRoles().forEach(role -> {

@@ -3,6 +3,8 @@ package com.seekerhub.seeker.service.user;
 import com.seekerhub.seeker.dto.storageDocument.StorageDocumentDto;
 import com.seekerhub.seeker.dto.user.UserDto;
 import com.seekerhub.seeker.dto.user.UserForRegisterDto;
+import com.seekerhub.seeker.entity.User;
+import com.seekerhub.seeker.entity.VerificationToken;
 import javassist.bytecode.ByteArray;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -56,4 +58,9 @@ public interface UserService<list> {
     void setType(long id);
 
     void deleteUserById(long id);
+    void createVerificationToken(User user, String token, TokenTypeE type);
+
+    VerificationToken getVerificationToken(String verificationToken);
+    void verifyEmail(long id);
+    void sendEmailVerificationToken(String username);
 }
