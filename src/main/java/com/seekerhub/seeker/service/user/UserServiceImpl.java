@@ -13,10 +13,14 @@ import com.seekerhub.seeker.exception.GenericException;
 import com.seekerhub.seeker.mapper.StorageMapper;
 import com.seekerhub.seeker.mapper.UserMapper;
 import com.seekerhub.seeker.model.FileUpload;
+import com.seekerhub.seeker.repository.EmployerRatingRepository;
+import com.seekerhub.seeker.repository.FreelancerRatingRepository;
 import com.seekerhub.seeker.repository.UserRepository;
 import com.seekerhub.seeker.repository.VerificationTokenRepository;
 import com.seekerhub.seeker.security.PrivateKeyImpl;
 import com.seekerhub.seeker.service.Email.EmailService;
+import com.seekerhub.seeker.service.EmployerRating.EmployerRatingService;
+import com.seekerhub.seeker.service.FreelancerRating.FreelancerRatingService;
 import com.seekerhub.seeker.service.employer.EmployerService;
 import com.seekerhub.seeker.service.freelancer.FreelancerService;
 import com.seekerhub.seeker.service.upload.UploadService;
@@ -67,6 +71,18 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     EmailService emailService;
+
+    @Autowired
+    EmployerRatingRepository employerRatingRepository;
+
+    @Autowired
+    EmployerRatingService employerRatingService;
+
+    @Autowired
+    FreelancerRatingRepository freelancerRatingRepository;
+
+    @Autowired
+    FreelancerRatingService freelancerRatingService;
 
     @Value("${app.file-upload.work}")
     private  String WORK_SPACE_NAME;
@@ -521,6 +537,25 @@ public class UserServiceImpl implements UserService {
         );
 
         emailService.sendEmail(message);
+    }
+
+    @Override
+    public Double compareRatings(long id) {
+        if (!userRepository.existsById(id))
+            throw new GenericException("User doesn't exist");
+
+        User user = userRepository.getOne(id);
+
+        long frID = user.getFreelancer().getId();
+        long empID = user.getEmployer().getId();
+
+        double empRate = employerRatingService.calculateTotalRatings(empID);
+        double frRate = freelancerRatingService.calculateTotalRatings(frID);
+
+        if (empRate > frRate)
+            return empRate;
+        else return frRate;
+
     }
 }
 

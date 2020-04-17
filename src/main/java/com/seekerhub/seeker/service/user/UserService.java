@@ -63,4 +63,6 @@ public interface UserService<list> {
     VerificationToken getVerificationToken(String verificationToken);
     void verifyEmail(long id);
     void sendEmailVerificationToken(String username);
+
+    Double compareRatings(long id);
 }

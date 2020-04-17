@@ -1,7 +1,5 @@
 package com.seekerhub.seeker.controller;
 
-import com.amazonaws.services.dynamodbv2.xspec.S;
-import com.seekerhub.seeker.dto.Project.ProjectDto;
 import com.seekerhub.seeker.dto.user.UserDto;
 import com.seekerhub.seeker.dto.user.UserForRegisterDto;
 import com.seekerhub.seeker.service.user.UserService;
@@ -181,6 +179,11 @@ public class UserController {
     @DeleteMapping("{id}/delete-work/{attachmentId}")
     public void deleteAttachmentById(@PathVariable long id, @PathVariable long attachmentId){
         userService.deleteSampleWorkById(id,attachmentId);
+    }
+
+    @GetMapping("compare/{id}")
+    public double compare(@PathVariable long id){
+       return userService.compareRatings(id);
     }
 
 }
