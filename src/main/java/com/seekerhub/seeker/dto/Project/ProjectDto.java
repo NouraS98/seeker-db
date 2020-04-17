@@ -11,6 +11,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.ColumnDefault;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDateTime;
@@ -41,5 +42,9 @@ public class ProjectDto {
     private String status;
     private LocalDateTime createdAt;
     private List<StorageDocumentDto> attachments = new ArrayList<>();
+
+    private boolean did_emp_rate;
+    private boolean did_fr_rate;
+
 
 }

@@ -258,5 +258,29 @@ public class ProjectServiceImp implements ProjectService{
      return localDateTime;
     }
 
+    @Override
+    public ProjectDto setEmployerRated(long id, boolean did_emp_rate) {
+        if(!projectRepository.existsById(id))
+            throw new GenericException("Project doesn't exist");
 
+        Project project = projectRepository.getOne(id);
+
+        project.setDid_emp_rate(did_emp_rate);
+        projectRepository.save(project);
+
+        return projectMapper.toDto(project);
+    }
+
+    @Override
+    public ProjectDto setFreelancerRated(long id, boolean did_fr_rate) {
+        if(!projectRepository.existsById(id))
+            throw new GenericException("Project doesn't exist");
+
+        Project project = projectRepository.getOne(id);
+
+        project.setDid_fr_rate(did_fr_rate);
+        projectRepository.save(project);
+
+        return projectMapper.toDto(project);
+    }
 }

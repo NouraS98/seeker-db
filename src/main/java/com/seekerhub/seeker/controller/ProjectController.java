@@ -88,5 +88,17 @@ import java.util.List;
            return ResponseEntity.ok(projectService.findProjectsBeforeExpiry());
     }
 
-
+    @PostMapping("emp_rated/{id}/{rated}")
+    public ResponseEntity setEmployerRated(@PathVariable long id, @PathVariable boolean rated){
+        return ResponseEntity.ok(projectService.setEmployerRated(id, rated));
     }
+
+    @PostMapping("fr_rated/{id}/{rated}")
+    public ResponseEntity setFreelancerRated(@PathVariable long id, @PathVariable boolean rated){
+        return ResponseEntity.ok(projectService.setFreelancerRated(id, rated));
+    }
+
+
+
+
+}

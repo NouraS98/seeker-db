@@ -35,6 +35,9 @@ public interface ProjectService {
 
     List<ProjectDto> findProjectsBeforeExpiry();
 
+    ProjectDto setEmployerRated(long id, boolean did_emp_rate);
+    ProjectDto setFreelancerRated(long id, boolean did_fr_rate);
+
 
 
 

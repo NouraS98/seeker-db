@@ -3,6 +3,7 @@ package com.seekerhub.seeker.entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -70,5 +71,13 @@ public class Project extends BaseEntity {
 
     @ManyToOne
     private Category category;
+
+
+    @ColumnDefault("false")
+    private boolean did_emp_rate;
+
+    @ColumnDefault("false")
+    private boolean did_fr_rate;
+
 
 }
