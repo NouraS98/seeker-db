@@ -540,7 +540,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Double compareRatings(long id) {
+    public int compareRatings(long id) {
         if (!userRepository.existsById(id))
             throw new GenericException("User doesn't exist");
 
@@ -552,9 +552,16 @@ public class UserServiceImpl implements UserService {
         double empRate = employerRatingService.calculateTotalRatings(empID);
         double frRate = freelancerRatingService.calculateTotalRatings(frID);
 
-        if (empRate > frRate)
-            return empRate;
-        else return frRate;
+        if (empRate > frRate){
+            user.setRating(String.valueOf(empRate));
+            userRepository.save(user);
+            return user.getEmployer().getNum_of_ratings();
+        } else{
+            user.setRating(String.valueOf(frRate));
+            userRepository.save(user);
+            return user.getFreelancer().getNum_of_ratings();
+        }
+
 
     }
 }

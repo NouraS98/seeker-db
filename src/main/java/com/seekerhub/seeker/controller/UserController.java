@@ -182,7 +182,7 @@ public class UserController {
     }
 
     @GetMapping("compare/{id}")
-    public double compare(@PathVariable long id){
+    public int compare(@PathVariable long id){
        return userService.compareRatings(id);
     }
 
