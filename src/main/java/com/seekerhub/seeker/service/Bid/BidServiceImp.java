@@ -43,6 +43,7 @@ public class BidServiceImp implements BidService {
     @Autowired
     ProjectService projectService;
 
+
     @Autowired
     ProjectMapper projectMapper;
 
@@ -88,10 +89,6 @@ public class BidServiceImp implements BidService {
         contractDto.setPrice(bid.getPrice());
         contractDto.setProject(projectMapper.toDto(bid.getProject()));
         contractDto.setFreelancer(freelancerMapper.toDto(bid.getFreelancer()));
-
-
-
-
 
 
         //TODO مدري وش التايب

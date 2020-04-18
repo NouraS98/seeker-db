@@ -35,6 +35,7 @@ public class UserDto implements Serializable {
     private String facebook;
     private String linkedIn;
     private String education;
+    private String isEnabled;
     private byte[] img;
    private String token_id;
     private List<StorageDocument> sampleWorks = new ArrayList<>();

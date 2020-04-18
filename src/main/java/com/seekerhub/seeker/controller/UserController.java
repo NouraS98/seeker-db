@@ -43,6 +43,10 @@ public class UserController {
         return ResponseEntity.ok(userService.findByEmail(email));
     }
 
+    @GetMapping("userID/{id}")
+    public String changeIsEnabled(@PathVariable long id){
+          return userService.changeIsEnabled(id);
+    }
 
 
 

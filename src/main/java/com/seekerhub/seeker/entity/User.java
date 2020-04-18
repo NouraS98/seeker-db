@@ -32,6 +32,7 @@ public class User extends BaseEntity {
     @Column(unique = true , nullable = false)
     private String email;
 
+
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "user_role" , joinColumns = { // هنا اسوي جوين لل٢ تيبلز عشان العلاقة ماني تو ماني
             @JoinColumn(name = "user_id" , referencedColumnName = "id") // التيبل الاول
@@ -57,8 +58,8 @@ public class User extends BaseEntity {
     @OneToOne
     private UserSocialMedia userSocialMedia;
 
-    @Column(columnDefinition = "boolean default true")
-    private boolean enabled;
+    @ColumnDefault("1")
+    private String isEnabled;
 
     @Enumerated(EnumType.STRING)
     private RoleEnum current_type;

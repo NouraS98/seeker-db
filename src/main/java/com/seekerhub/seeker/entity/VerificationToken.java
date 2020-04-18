@@ -16,6 +16,8 @@ import java.time.ZonedDateTime;
 import java.util.Calendar;
 import java.util.Date;
 
+import static javax.persistence.CascadeType.REMOVE;
+
 @Data
 @EqualsAndHashCode(callSuper = true)
 @Entity
@@ -29,7 +31,7 @@ public class VerificationToken extends BaseEntity {
     @Column(name = "token", updatable = false, nullable = false)
     private String token;
 
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne(fetch = FetchType.EAGER, cascade = REMOVE)
     @JoinColumn(nullable = false, name = "user_id")
     private User user;
 

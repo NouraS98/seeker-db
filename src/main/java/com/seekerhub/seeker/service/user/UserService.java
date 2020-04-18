@@ -17,6 +17,7 @@ public interface UserService<list> {
     UserDto findByUsername(String username);
     UserDto findByEmail (String email);
 
+    String changeIsEnabled(long id);
 
     UserDto register(UserForRegisterDto userDto);
 

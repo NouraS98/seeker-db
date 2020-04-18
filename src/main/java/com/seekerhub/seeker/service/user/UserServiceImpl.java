@@ -121,6 +121,22 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public String changeIsEnabled(long id) {
+
+        User user = userRepository.getOne(id);
+        if(user.getIsEnabled().equals("0")){
+
+            user.setIsEnabled("1");
+        }else{
+            user.setIsEnabled("0");
+        }
+
+        userRepository.save(user);
+
+        return user.getIsEnabled();
+    }
+
+    @Override
     @Transactional
     public UserDto register(UserForRegisterDto userDto) {
 
@@ -145,6 +161,7 @@ public class UserServiceImpl implements UserService {
         User user = userMapper.toEntity(userDto);
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         user.setCurrent_type(RoleEnum.FREELANCER);
+        user.setIsEnabled("1");
         User userToSave = userRepository.save(user);
 
         EmployerDto employerDto = EmployerDto.builder().user(userMapper.toDto(userToSave)).build();
