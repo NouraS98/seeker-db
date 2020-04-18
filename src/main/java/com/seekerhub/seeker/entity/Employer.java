@@ -31,7 +31,7 @@ public class Employer extends BaseEntity {
     private User user;
 
     @OneToMany(
-            mappedBy = "employer"
+            mappedBy = "employer", cascade = CascadeType.ALL
     )
     private List<Project> projects = new ArrayList<>();
 

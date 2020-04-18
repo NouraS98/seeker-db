@@ -38,6 +38,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.util.*;
 
+
 @Service
 public class UserServiceImpl implements UserService {
 
@@ -518,7 +519,22 @@ public class UserServiceImpl implements UserService {
         if (!userRepository.existsById(id))
             throw new GenericException("User doesn't exist");
 
-        userRepository.deleteById(id);
+        User user = userRepository.getOne(id);
+        System.out.println("user id before "+user.getId());
+        VerificationToken verificationToken = verificationTokenRepository.findByUser(user);
+        if(verificationToken != null){
+            System.out.println("in verfication "+verificationToken.getUser().getId());
+
+            verificationTokenRepository.delete(verificationToken);
+        }else{
+            System.out.println("user id after "+user.getId());
+            userRepository.deleteById(id);
+        }
+
+        if (!userRepository.existsById(id))
+            System.out.println("yes deleted");
+
+
     }
 
     @Override
