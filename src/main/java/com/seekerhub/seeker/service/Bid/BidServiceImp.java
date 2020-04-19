@@ -150,5 +150,14 @@ public class BidServiceImp implements BidService {
         bidRepository.deleteById(id);
     }
 
+    @Override
+    public void deleteBidByIdAdmin(long id) {
+        if (!bidRepository.existsById(id))
+            throw new GenericException("Bid doesn't exist");
+
+        bidRepository.deleteById(id);
+
+    }
+
 
 }

@@ -57,5 +57,7 @@ public class BidController {
     @DeleteMapping("{id}")
     public void deleteBidById(@PathVariable long id){ bidService.deleteBidById(id);
     }
-
+    @DeleteMapping("d/{id}")
+    public void deleteBidByIdAdmin(@PathVariable long id){ bidService.deleteBidByIdAdmin(id);
+    }
 }

@@ -19,4 +19,7 @@ public interface BidService {
     List<BidDto> findBidByStatus(String status);
 
     void deleteBidById(long id);
+
+    void deleteBidByIdAdmin(long id);
+
 }
