@@ -76,6 +76,10 @@ import java.util.List;
         projectService.deleteProjectById(id);
     }
 
+    @DeleteMapping("d/{id}")
+    public void deleteProjectByIdAdmin(@PathVariable long id){
+        projectService.deleteProjectByIdAdmin(id);
+    }
     //extend
     @PutMapping("extend")
     public void extendExpiryDate(@RequestBody ProjectDto projectDto) {

@@ -231,6 +231,15 @@ public class ProjectServiceImp implements ProjectService{
        projectRepository.deleteById(id);
 
     }
+
+    public void deleteProjectByIdAdmin(long id){
+        if (!projectRepository.existsById(id))
+            throw new GenericException("Project doesn't exist");
+
+        projectRepository.deleteById(id);
+
+    }
+
   //  extend not yet
    public void extendProjectById(long id, LocalDateTime localDateTime){
        if (!projectRepository.existsById(id))

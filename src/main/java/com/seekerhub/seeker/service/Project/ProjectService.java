@@ -30,6 +30,8 @@ public interface ProjectService {
     //todo raghad add extend and delete funcrions
     //delete
     void deleteProjectById(long id);
+    void deleteProjectByIdAdmin(long id);
+
     //extend
     void extendProjectById(long id, LocalDateTime localDateTime);
 
