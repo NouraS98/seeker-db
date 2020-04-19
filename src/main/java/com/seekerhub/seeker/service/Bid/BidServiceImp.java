@@ -118,7 +118,7 @@ public class BidServiceImp implements BidService {
         bidRepository.save(bid);
 
         projectService.setStatus(bid.getProject().getId());
-//        pushNotificationsService.sendAcceptBidNotification(bidMapper.toDto(bid),bid.getFreelancer().getUser().getToken_id());
+        pushNotificationsService.sendAcceptBidNotification(bidMapper.toDto(bid),bid.getFreelancer().getUser().getToken_id());
         return contact;
 
     }

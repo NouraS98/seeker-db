@@ -51,6 +51,7 @@ public class PushNotificationsService {
     }
 
     public void sendToAUser(ChatMessageDto notificationDto, String token) throws JSONException {
+        if(token ==null) return;
 
         JSONObject body = new JSONObject();
         body.put("to", token);
@@ -96,6 +97,8 @@ public class PushNotificationsService {
 
 
     public void sendBeforeExpiry(ProjectDto projectDto) {
+        if(projectDto.getEmployer().getUser().getToken_id() ==null) return;
+
         JSONObject body = new JSONObject();
         String token = projectDto.getEmployer().getUser().getToken_id();
         body.put("to", token);
@@ -139,6 +142,8 @@ public class PushNotificationsService {
     }
 
     public void sendAcceptBidNotification(BidDto bid , String token) {
+        if(token ==null) return;
+
         JSONObject body = new JSONObject();
         body.put("to", token);
         body.put("priority", "high");
@@ -182,6 +187,8 @@ public class PushNotificationsService {
     }
 
     public void sendBeforeMilestone(MilestoneDto milestoneDto, String token) {
+        if(token ==null) return;
+
         JSONObject body = new JSONObject();
         body.put("to", token);
         body.put("priority", "high");
@@ -223,6 +230,7 @@ public class PushNotificationsService {
     }
 
     public void sendToFreelancerAccordingToSkills(ProjectDto projectDto, String token) {
+        if(token ==null) return;
         JSONObject body = new JSONObject();
         body.put("to", token);
         body.put("priority", "high");
