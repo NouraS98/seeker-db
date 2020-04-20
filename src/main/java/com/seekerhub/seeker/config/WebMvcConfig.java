@@ -63,6 +63,8 @@ public class WebMvcConfig implements WebMvcConfigurer {
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/linkExpired.html").setViewName("linkExpired");
+        registry.addViewController("/linkExpiredPassword.html").setViewName("linkExpiredPassword");
+
     }
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {

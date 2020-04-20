@@ -272,4 +272,78 @@ public class PushNotificationsService {
             e.printStackTrace();
         }
     }
+
+    public void sendDeletedByAdminNotification(BidDto bid, String token_id) {
+        if(token_id ==null) return;
+        JSONObject body = new JSONObject();
+        body.put("to", token_id);
+        body.put("priority", "high");
+
+        JSONObject notification = new JSONObject();
+        notification.put("title", "Your bid " + bid.getTitle() + "is deleted");
+        notification.put("body", "Your bid is Deleted by the admin please contact the support for more information");
+//        notification.put("click_action","open_project");
+
+        JSONObject data = new JSONObject();
+        ObjectMapper mapper = new ObjectMapper( );
+        mapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+        mapper.registerModule(new JavaTimeModule());
+        try {
+            data.put("title", "Your bid " + bid.getTitle() + "is deleted");
+            data.put("body", "Your bid is Deleted by the admin please contact the support for more information");
+            data.put("type", "admndelete");
+            data.put("message", mapper.writeValueAsString(bid));
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+
+        // data.put("Key-2", "JSA Data 2");
+
+//        body.put("notification", notification);
+
+        body.put("data", data);
+
+        HttpEntity<String> request = new HttpEntity<>(body.toString());
+
+        CompletableFuture<String> pushNotification = send(request);
+        CompletableFuture.allOf(pushNotification).join();
+
+        try {
+            String firebaseResponse = pushNotification.get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void sendProjectDeletedByAdminNotification(String project, String token_id) {
+        if(token_id ==null) return;
+        JSONObject body = new JSONObject();
+        body.put("to", token_id);
+        body.put("priority", "high");
+
+        JSONObject data = new JSONObject();
+        ObjectMapper mapper = new ObjectMapper( );
+        mapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+        mapper.registerModule(new JavaTimeModule());
+            data.put("title", "Your project " + project + "is deleted");
+            data.put("body", "Your project is Deleted by the admin please contact the support for more information");
+            data.put("type", "skills");
+
+        body.put("data", data);
+
+        HttpEntity<String> request = new HttpEntity<>(body.toString());
+
+        CompletableFuture<String> pushNotification = send(request);
+        CompletableFuture.allOf(pushNotification).join();
+
+        try {
+            String firebaseResponse = pushNotification.get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+    }
 }

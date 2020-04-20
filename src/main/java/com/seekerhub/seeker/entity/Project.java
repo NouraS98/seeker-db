@@ -12,6 +12,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import static javax.persistence.CascadeType.REMOVE;
+
 @Data
 @Entity
 @NoArgsConstructor
@@ -35,7 +37,7 @@ public class Project extends BaseEntity {
 
     @OneToMany(
             mappedBy = "project",
-            cascade = CascadeType.ALL,
+            cascade = REMOVE,
             fetch = FetchType.LAZY
     )
     private List<Milestone> milestones = new ArrayList<>();

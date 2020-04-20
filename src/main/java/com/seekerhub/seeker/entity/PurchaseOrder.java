@@ -6,10 +6,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.ColumnDefault;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
+
+import static javax.persistence.CascadeType.REMOVE;
 
 @Data
 @Entity
@@ -20,7 +19,7 @@ public class PurchaseOrder extends BaseEntity {
     private String transactionId;
     private double amount;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY, cascade = REMOVE)
     @JoinColumn(name = "milestone_id" ,referencedColumnName = "id")
     Milestone milestone;
 

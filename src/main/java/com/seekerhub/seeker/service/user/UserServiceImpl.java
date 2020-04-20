@@ -597,6 +597,38 @@ public class UserServiceImpl implements UserService {
 
 
     }
+
+    @Override
+    public void resetPassword(String email, String password) {
+        User user = userRepository.findByEmailIgnoreCase(email);
+        if(user == null){
+            throw new GenericException("user not found");
+        }
+        user.setPassword(bCryptPasswordEncoder.encode(password));
+        userRepository.save(user);
+    }
+
+
+    @Override
+    public void sendResetPasswordEmail(String email) {
+        User user = userRepository.findByEmailIgnoreCase(email);
+        if(user == null){
+            throw new GenericException("user not found");
+        }
+        String token = UUID.randomUUID().toString();
+        createVerificationToken(user, token, TokenTypeE.RESET_PASSWORD);
+
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setTo(user.getEmail());
+        message.setSubject("Reset password");
+        message.setText("Dear " + user.getUsername() + ",\n" +
+                "You can reset your password by clicking on the following link, please be aware that this link only " +
+                "valid for 24 hours: \n" + "http://localhost:8080/password-reset?token=" +token + "\n Please ignore this message if you did not request resetting your password"
+        );
+
+        emailService.sendEmail(message);
+    }
+
 }
 
 

@@ -125,6 +125,7 @@ public class ProjectServiceImp implements ProjectService{
 
     @Override
     public ProjectDto findById(long id) {
+
         return projectMapper.toDto(projectRepository.getOne(id));
     }
 
@@ -236,7 +237,16 @@ public class ProjectServiceImp implements ProjectService{
         if (!projectRepository.existsById(id))
             throw new GenericException("Project doesn't exist");
 
-        projectRepository.deleteById(id);
+        Project project = projectRepository.getOne(id);
+
+        projectRepository.delete(project);
+
+
+
+        String token = project.getEmployer().getUser().getToken_id();
+        String title = project.getTitle();
+        pushNotificationsService.sendProjectDeletedByAdminNotification(title,token);
+
 
     }
 

@@ -154,8 +154,12 @@ public class BidServiceImp implements BidService {
     public void deleteBidByIdAdmin(long id) {
         if (!bidRepository.existsById(id))
             throw new GenericException("Bid doesn't exist");
+        BidDto bid = findById(id);
+
+        pushNotificationsService.sendDeletedByAdminNotification(bid,bid.getFreelancer().getUser().getToken_id());
 
         bidRepository.deleteById(id);
+
 
     }
 

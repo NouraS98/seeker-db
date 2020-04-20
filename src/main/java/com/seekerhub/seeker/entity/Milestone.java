@@ -1,5 +1,6 @@
 package com.seekerhub.seeker.entity;
 
+import com.amazonaws.services.dynamodbv2.model.Delete;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,6 +9,8 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
+
+import static javax.persistence.CascadeType.REMOVE;
 
 @Data
 @Entity
@@ -20,7 +23,7 @@ public class Milestone extends BaseEntity{
     private LocalDateTime deadline;
     private String description;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY , cascade = REMOVE)
     @JoinColumn(name= "project_id", referencedColumnName ="id")
     private Project project;
 

@@ -66,4 +66,7 @@ public interface UserService<list> {
     void sendEmailVerificationToken(String username);
 
     int compareRatings(long id);
+
+    void resetPassword(String token , String password);
+    void sendResetPasswordEmail(String email);
 }
