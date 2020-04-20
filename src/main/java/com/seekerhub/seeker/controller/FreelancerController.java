@@ -76,4 +76,10 @@ public class FreelancerController {
         return ResponseEntity.ok(freelancerService.findBySkills(skill));
     }
 
+    @PostMapping("Iban")
+    public void setFreelancerIban(@RequestBody FreelancerDto freelancerDto){
+
+        freelancerService.setFreelancerIban(freelancerDto.getId(),freelancerDto.getFullName(), freelancerDto.getIbanNumber());
+    }
+
 }
