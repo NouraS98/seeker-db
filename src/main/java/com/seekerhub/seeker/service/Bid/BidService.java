@@ -22,4 +22,6 @@ public interface BidService {
 
     void deleteBidByIdAdmin(long id);
 
+    List<BidDto> findBidByProject(long project_id);
+
 }

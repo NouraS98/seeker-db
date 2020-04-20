@@ -4,6 +4,7 @@ import com.seekerhub.seeker.dto.Bid.BidDto;
 import com.seekerhub.seeker.dto.Contract.ContractDto;
 import com.seekerhub.seeker.dto.Milestone.MilestoneDto;
 import com.seekerhub.seeker.dto.Project.ProjectBasicDto;
+import com.seekerhub.seeker.dto.Project.ProjectDto;
 import com.seekerhub.seeker.entity.Bid;
 import com.seekerhub.seeker.entity.Milestone;
 import com.seekerhub.seeker.entity.Project;
@@ -159,5 +160,14 @@ public class BidServiceImp implements BidService {
 
     }
 
+    @Override
+    public List<BidDto> findBidByProject(long project_id) {
+        if (!projectRepository.existsById(project_id))
+            throw new GenericException("Project doesn't exist");
 
+        Project project = projectRepository.getOne(project_id);
+
+        return bidMapper.toDtos(project.getBids());
+
+    }
 }

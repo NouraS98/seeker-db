@@ -110,7 +110,7 @@ public class UserController {
     }
 
     @PostMapping("education/{id}/{education}")
-    public ResponseEntity setEducation(@PathVariable long id, @PathVariable String education){
+    public ResponseEntity setEducation(@PathVariable long id, @RequestBody UserDto education){
 //        userService.setEducation(id, education);
         return ResponseEntity.ok(userService.setEducation(id, education));
 

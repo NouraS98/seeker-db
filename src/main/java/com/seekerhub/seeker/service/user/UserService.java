@@ -36,7 +36,7 @@ public interface UserService<list> {
     UserDto setTwitter(long id, String twitter);
     UserDto setLinkedin(long id, String linkedIn);
     UserDto setFacebook(long id, String facebook);
-    UserDto setEducation(long id, String education);
+    UserDto setEducation(long id, UserDto education);
 
     String getLinkedInById(long id);
     String getTwitterById(long id);
