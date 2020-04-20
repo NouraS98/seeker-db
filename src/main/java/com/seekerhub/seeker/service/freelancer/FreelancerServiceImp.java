@@ -113,6 +113,19 @@ public class FreelancerServiceImp implements FreelancerService {
     }
 
     @Override
+    public void setFreelancerIban(long id, String fullName, String ibanNumber) {
+        if(!freelancerRepository.existsById(id))
+            throw new GenericException("The freelancer was not found");
+
+        Freelancer freelancer = freelancerRepository.getOne(id);
+        freelancer.setIbanNumber(ibanNumber);
+        freelancer.setFullName(fullName);
+
+        freelancerRepository.save(freelancer);
+
+    }
+
+    @Override
     public Set<FreelancerDto> findBySkills(Collection<Skill> skills) {
         Collection<Long> ids = new ArrayList<>();
         skills.forEach(skill -> {

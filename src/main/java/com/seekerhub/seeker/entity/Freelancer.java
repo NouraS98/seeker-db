@@ -28,6 +28,8 @@ public class Freelancer extends BaseEntity {
     private int total_response_time;
     private int total_quality_of_work;
     private int num_of_hired_projects;
+    private String fullName;
+    private String ibanNumber;
 
     @ColumnDefault("0.0")
     private double credit;

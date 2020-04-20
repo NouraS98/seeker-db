@@ -31,6 +31,8 @@ public class FreelancerDto {
     private int total_quality_of_work;
     private int num_of_hired_projects;
     private List<BidDto> bids = new ArrayList<>();
+    private String fullName;
+    private String ibanNumber;
   //  private Employer employer;
     //todo new - just added 14 march
   private Set<SkillDto> skills = new HashSet<>();

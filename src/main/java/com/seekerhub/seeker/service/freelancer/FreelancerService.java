@@ -23,6 +23,7 @@ public interface FreelancerService {
     void setRatingValues(long id, int num_of_ratings, int total_quality_of_work, int total_response_time);
     void setNumberOfWorkedOnProjects(long id);
 
+    void setFreelancerIban(long id, String fullName, String ibanNumber);
     Set<FreelancerDto> findBySkills(Collection<Skill> skills);
 
 }

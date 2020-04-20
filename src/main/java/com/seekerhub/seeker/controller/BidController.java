@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("api/bid")
 public class BidController {
@@ -60,4 +62,10 @@ public class BidController {
     @DeleteMapping("d/{id}")
     public void deleteBidByIdAdmin(@PathVariable long id){ bidService.deleteBidByIdAdmin(id);
     }
+
+    @GetMapping("find_projs/{project_id}")
+    public ResponseEntity findBidsByProjectId(@PathVariable long project_id){
+        return ResponseEntity.ok(bidService.findBidByProject(project_id));
+    }
+
 }

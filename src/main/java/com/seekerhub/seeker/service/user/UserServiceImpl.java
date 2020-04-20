@@ -372,12 +372,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDto setEducation(long id, String education) {
+    public UserDto setEducation(long id, UserDto education) {
         if(!userRepository.existsById(id))
             throw new GenericException("The user was not found");
         User user = userRepository.getOne(id);
 
-        user.setEducation(education);
+        user.setEducation(education.getEducation());
         userRepository.save(user);
 
         return userMapper.toDto(user);
