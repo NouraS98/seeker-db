@@ -138,6 +138,16 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public void logout(long id) {
+
+        if (!userRepository.existsById(id))
+            throw new GenericException("User doesn't exist");
+      User user = userRepository.getOne(id);
+    //  user.setToken_id(null);
+      userRepository.save(user);
+    }
+
+    @Override
     @Transactional
     public UserDto register(UserForRegisterDto userDto) {
 
@@ -627,6 +637,46 @@ public class UserServiceImpl implements UserService {
         );
 
         emailService.sendEmail(message);
+    }
+
+    @Override
+    public void SetEnableProjectExpiryNoti(long id, boolean value) {
+        if(!userRepository.existsById(id))
+            throw new GenericException("The user was not found");
+        User user = userRepository.getOne(id);
+        user.setEnableProjectExpiryNoti(value);
+
+        userRepository.save(user);
+    }
+
+    @Override
+    public void SetEnableProjectSkillNoti(long id, boolean value) {
+        if(!userRepository.existsById(id))
+            throw new GenericException("The user was not found");
+        User user = userRepository.getOne(id);
+        user.setEnableProjectSkillNoti(value);
+
+        userRepository.save(user);
+    }
+
+    @Override
+    public void SetEnableAcceptBidNoti(long id, boolean value) {
+        if(!userRepository.existsById(id))
+            throw new GenericException("The user was not found");
+        User user = userRepository.getOne(id);
+        user.setEnableAcceptBidNoti(value);
+
+        userRepository.save(user);
+    }
+
+    @Override
+    public void SetEnableMilestoneDLNoti(long id, boolean value) {
+        if(!userRepository.existsById(id))
+            throw new GenericException("The user was not found");
+        User user = userRepository.getOne(id);
+        user.setEnableMilestoneDLNoti(value);
+
+        userRepository.save(user);
     }
 
 }

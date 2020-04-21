@@ -190,4 +190,30 @@ public class UserController {
        return userService.compareRatings(id);
     }
 
+    @PutMapping ("setEnableProjectExpiryNoti/{id}/{value}")
+    public void SetEnableProjectExpiryNoti(@PathVariable  Long id , @PathVariable  boolean value){
+        userService.SetEnableProjectExpiryNoti(id,value);
+    }
+
+    @PutMapping ("SetEnableProjectSkillNoti/{id}/{value}")
+    public void SetEnableProjectSkillNoti(@PathVariable  Long id, @PathVariable  boolean value) {
+        userService.SetEnableProjectSkillNoti(id, value);
+    }
+
+    @PutMapping ("SetEnableAcceptBidNoti/{id}/{value}")
+    public void SetEnableAcceptBidNoti(@PathVariable  Long id, @PathVariable boolean value){
+        userService.SetEnableAcceptBidNoti(id,value);
+
+    }
+
+    @PutMapping ("SetEnableMilestoneDLNoti/{id}/{value}")
+    public void SetEnableMilestoneDLNoti(@PathVariable Long id , @PathVariable  boolean value){
+       userService.SetEnableMilestoneDLNoti(id,value);
+    }
+
+    @PutMapping ("logout/{id}")
+    public void logout(@PathVariable long id){
+        userService.logout(id);
+    }
+
 }

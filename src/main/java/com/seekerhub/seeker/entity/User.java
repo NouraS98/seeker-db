@@ -85,4 +85,18 @@ public class User extends BaseEntity {
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<StorageDocument> sampleWorks = new ArrayList<>();
 
+    @ColumnDefault("true")
+    private boolean enableProjectExpiryNoti;
+
+    @ColumnDefault("true")
+    private boolean enableProjectSkillNoti;
+
+    @ColumnDefault("true")
+    private boolean enableAcceptBidNoti;
+
+    @ColumnDefault("true")
+    private boolean enableMilestoneDLNoti;
+
+
+
 }

@@ -10,7 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
-public interface UserService<list> {
+public interface UserService {
     UserDto save(UserDto userdto);
     List<UserDto> findAll();
     UserDto findById(long id);
@@ -18,6 +18,8 @@ public interface UserService<list> {
     UserDto findByEmail (String email);
 
     String changeIsEnabled(long id);
+
+    void logout (long id);
 
     UserDto register(UserForRegisterDto userDto);
 
@@ -69,4 +71,13 @@ public interface UserService<list> {
 
     void resetPassword(String token , String password);
     void sendResetPasswordEmail(String email);
+
+    void SetEnableProjectExpiryNoti(long id , boolean value);
+
+    void SetEnableProjectSkillNoti(long id, boolean value);
+
+    void SetEnableAcceptBidNoti(long id, boolean value);
+
+    void SetEnableMilestoneDLNoti(long id , boolean value);
+
 }

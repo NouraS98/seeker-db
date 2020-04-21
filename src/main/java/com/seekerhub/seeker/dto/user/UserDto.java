@@ -9,6 +9,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.ColumnDefault;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -40,5 +41,13 @@ public class UserDto implements Serializable {
    private String token_id;
     private List<StorageDocument> sampleWorks = new ArrayList<>();
     private boolean verified;
+
+    private boolean enableProjectExpiryNoti;
+
+    private boolean enableProjectSkillNoti;
+
+    private boolean enableAcceptBidNoti;
+
+    private boolean enableMilestoneDLNoti;
 
 }
