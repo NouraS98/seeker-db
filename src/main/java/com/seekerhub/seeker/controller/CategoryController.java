@@ -28,6 +28,11 @@ public class CategoryController {
         return ResponseEntity.ok(categoryService.findById(id));
     }
 
+    @PutMapping("{id}")
+    public ResponseEntity setImage(@PathVariable long id , @RequestBody String image){
+        return ResponseEntity.ok(categoryService.setImage(id, image));
+    }
+
 //    @GetMapping("category_type/{category_type}")
 //    public ResponseEntity findByCategory_type(@PathVariable String category_type){
 //        return ResponseEntity.ok(categoryService.findByCategory_type(category_type));

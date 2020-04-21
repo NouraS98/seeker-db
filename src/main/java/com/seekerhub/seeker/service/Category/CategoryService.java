@@ -9,5 +9,6 @@ public interface CategoryService {
     CategoryDto save(CategoryDto projectDto);
     List<CategoryDto> findAll();
     CategoryDto findById(long id);
+    CategoryDto setImage(long id ,String image);
 //    List<CategoryDto> findByCategory_type(String category_type);
 }

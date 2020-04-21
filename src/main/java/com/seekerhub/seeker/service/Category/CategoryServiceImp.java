@@ -2,6 +2,8 @@ package com.seekerhub.seeker.service.Category;
 
 import com.seekerhub.seeker.dto.Category.CategoryDto;
 import com.seekerhub.seeker.entity.Category;
+import com.seekerhub.seeker.entity.Project;
+import com.seekerhub.seeker.exception.GenericException;
 import com.seekerhub.seeker.mapper.CategoryMapper;
 import com.seekerhub.seeker.repository.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +35,17 @@ public class CategoryServiceImp implements CategoryService {
     @Override
     public CategoryDto findById(long id) {
         return categoryMapper.toDto(categoryRepository.getOne(id));
+    }
+
+    @Override
+    public CategoryDto setImage(long id,String image) {
+        if (!categoryRepository.existsById(id))
+            throw new GenericException("Category doesn't exist");
+
+        Category category = categoryRepository.getOne(id);
+        category.setImage(image);
+        Category categoryToSave = categoryRepository.save(category);
+        return categoryMapper.toDto(categoryToSave);
     }
 
 //    @Override
