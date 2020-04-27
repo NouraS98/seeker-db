@@ -58,13 +58,13 @@ public class EmployerController {
 //
 //    }
 
-    @PutMapping("rating_values")
-    public void setEmployerRatingValues(@RequestBody EmployerDto employerDto){
+    @PutMapping("rating_values/{project_id}")
+    public void setEmployerRatingValues(@RequestBody EmployerDto employerDto, @PathVariable long project_id){
         employerService.setRatingValues(employerDto.getId(),
                 employerDto.getNum_of_ratings(),
                 employerDto.getResponse_time(),
                 employerDto.getTotal_on_time_payment(),
-                employerDto.getTotal_emp_ratings());
+                employerDto.getTotal_emp_ratings(), project_id);
     }
 
 
