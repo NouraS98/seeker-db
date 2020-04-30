@@ -1,5 +1,5 @@
 package com.seekerhub.seeker.enums;
 
 public enum RoleEnum {
-    FREELANCER, EMPLOYER
+    FREELANCER, EMPLOYER, ADMIN
 }

@@ -55,6 +55,9 @@ public class User extends BaseEntity {
     @OneToOne(mappedBy = "user", cascade = REMOVE)
     private Freelancer freelancer;
 
+    @OneToOne(mappedBy = "user", cascade = REMOVE)
+    private Admin admin;
+
     @OneToOne
     private UserSocialMedia userSocialMedia;
 
@@ -96,6 +99,9 @@ public class User extends BaseEntity {
 
     @ColumnDefault("true")
     private boolean enableMilestoneDLNoti;
+
+    @ColumnDefault("false")
+    private boolean login;
 
 
 

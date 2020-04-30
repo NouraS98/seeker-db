@@ -1,5 +1,6 @@
 package com.seekerhub.seeker.service.user;
 
+import com.seekerhub.seeker.dto.Admin.AdminDto;
 import com.seekerhub.seeker.dto.Employer.EmployerDto;
 import com.seekerhub.seeker.dto.Freelancer.FreelancerDto;
 import com.seekerhub.seeker.dto.storageDocument.StorageDocumentDto;
@@ -18,6 +19,7 @@ import com.seekerhub.seeker.repository.FreelancerRatingRepository;
 import com.seekerhub.seeker.repository.UserRepository;
 import com.seekerhub.seeker.repository.VerificationTokenRepository;
 import com.seekerhub.seeker.security.PrivateKeyImpl;
+import com.seekerhub.seeker.service.Admin.AdminService;
 import com.seekerhub.seeker.service.Email.EmailService;
 import com.seekerhub.seeker.service.EmployerRating.EmployerRatingService;
 import com.seekerhub.seeker.service.FreelancerRating.FreelancerRatingService;
@@ -63,6 +65,10 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UploadService uploadService;
+
+    @Autowired
+    private AdminService adminService;
+
 
     @Autowired
     StorageMapper storageMapper;
@@ -143,7 +149,7 @@ public class UserServiceImpl implements UserService {
         if (!userRepository.existsById(id))
             throw new GenericException("User doesn't exist");
       User user = userRepository.getOne(id);
-    //  user.setToken_id(null);
+      user.setLogin(false);
       userRepository.save(user);
     }
 
@@ -181,6 +187,49 @@ public class UserServiceImpl implements UserService {
         FreelancerDto freelancerDto = FreelancerDto.builder().user(userMapper.toDto(userToSave)).build();
         freelancerService.save(freelancerDto);
         sendEmailVerificationToken(userToSave.getUsername());
+
+        return userMapper.toDto(userToSave);
+    }
+
+    @Override
+    public UserDto registerAdmin(UserForRegisterDto userDto) {
+
+        List<ApiError> errors = new ArrayList<>();
+
+//        if (userRepository.existsByUsername(userDto.getUsername()))
+//            errors.add(ApiError.builder().field("username").message("Username already exists").build());
+
+        if (userRepository.existsByEmail(userDto.getEmail()))
+            errors.add(ApiError.builder().field("email").message("Email already exists").build());
+
+        if (errors.size() > 0)
+            throw new GenericException("User already exists", errors);
+
+
+
+        User user = userMapper.toEntity(userDto);
+        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        user.setCurrent_type(RoleEnum.ADMIN);
+        user.setIsEnabled("1");
+        user.setVerified(true);
+
+        User userToSave = userRepository.save(user);
+
+
+//
+//        Set<Role> roles = new HashSet<>();
+//        roles.add(new Role("Admin" ));
+//        user.setRoles(roles);
+//        userRepository.save(user);
+
+
+
+        AdminDto adminDto = AdminDto.builder().user(userMapper.toDto(userToSave)).build();
+        adminDto.setEmail(user.getEmail());
+        adminDto.setUsername(user.getUsername());
+        adminDto.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        adminService.save(adminDto);
+
 
         return userMapper.toDto(userToSave);
     }

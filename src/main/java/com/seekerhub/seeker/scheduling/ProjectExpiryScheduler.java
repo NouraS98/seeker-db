@@ -34,7 +34,7 @@ public class ProjectExpiryScheduler {
     public void sendNotification(){
         List<ProjectDto> projectDtoList = projectService.findProjectsBeforeExpiry();
         projectDtoList.forEach(projectDto -> {
-            if(projectDto.getEmployer().getUser().isEnableProjectExpiryNoti())
+            if(projectDto.getEmployer().getUser().isEnableProjectExpiryNoti() && projectDto.getEmployer().getUser().isLogin())
             pushNotificationsService.sendBeforeExpiry(projectDto);
 
         });
@@ -46,7 +46,7 @@ public class ProjectExpiryScheduler {
 
         List<Milestone> milestoneDtos = milestoneService.findMilestoneBeforeByDeadline();
         milestoneDtos.forEach(milestoneDto -> {
-            if(milestoneDto.getProject().getEmployer().getUser().isEnableMilestoneDLNoti())
+            if(milestoneDto.getProject().getEmployer().getUser().isEnableMilestoneDLNoti() && milestoneDto.getProject().getEmployer().getUser().isLogin())
             pushNotificationsService.sendBeforeMilestone(milestoneMapper.toDto(milestoneDto) , milestoneDto.getProject().getEmployer().getUser().getToken_id());
 
         });

@@ -73,7 +73,7 @@ public class ProjectServiceImp implements ProjectService{
         Set<FreelancerDto> freelancerDtoSet = freelancerService.findBySkills(projectToSave.getSkills());
 
         freelancerDtoSet.forEach( freelancerDto -> {
-                    if(freelancerDto.getUser().isEnableProjectSkillNoti())
+                    if(freelancerDto.getUser().isEnableProjectSkillNoti() && freelancerDto.getUser().isLogin())
                     pushNotificationsService.sendToFreelancerAccordingToSkills(projectMapper.toDto(projectToSave),freelancerDto.getUser().getToken_id());
                 }
         );

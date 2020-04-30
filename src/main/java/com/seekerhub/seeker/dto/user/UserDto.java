@@ -50,4 +50,7 @@ public class UserDto implements Serializable {
 
     private boolean enableMilestoneDLNoti;
 
+    private boolean login;
+
+
 }

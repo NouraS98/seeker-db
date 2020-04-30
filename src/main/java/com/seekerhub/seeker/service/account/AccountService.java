@@ -10,4 +10,6 @@ public interface AccountService {
 
     String login(LoginDto loginDto);
 
+    UserDto registerAdmin(UserForRegisterDto userForRegisterDto);
+
 }

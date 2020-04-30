@@ -34,4 +34,10 @@ public class AccountController {
     public void resetPassword(@PathVariable  String email){
         userService.sendResetPasswordEmail(email);
     }
+
+    @PostMapping("registerAdmin")
+   public ResponseEntity registerAdmin (@RequestBody UserForRegisterDto userDto){
+        return ResponseEntity.ok(accountService.registerAdmin(userDto));
+
+    }
 }

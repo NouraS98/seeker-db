@@ -22,6 +22,8 @@ public interface UserService {
     void logout (long id);
 
     UserDto register(UserForRegisterDto userDto);
+    UserDto registerAdmin(UserForRegisterDto userDto);
+
 
     StorageDocumentDto uploadAvatar(Long id,MultipartFile file);
 

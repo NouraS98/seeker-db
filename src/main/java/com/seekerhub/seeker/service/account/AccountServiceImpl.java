@@ -63,9 +63,16 @@ public class AccountServiceImpl implements AccountService {
             if(!user.isVerified()){
                 throw new GenericException("Email is not verified");
             }
-
+            User userToSave = userRepository.findByEmailIgnoreCase(loginDto.getEmail());
+            userToSave.setLogin(true);
+            userRepository.save(userToSave);
         }
         final String token = tokenService.generateToken(userDetails);
         return token;
+    }
+
+    @Override
+    public UserDto registerAdmin(UserForRegisterDto userForRegisterDto) {
+        return userService.registerAdmin(userForRegisterDto);
     }
 }
