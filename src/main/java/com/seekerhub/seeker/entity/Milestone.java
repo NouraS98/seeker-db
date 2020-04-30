@@ -23,7 +23,7 @@ public class Milestone extends BaseEntity{
     private LocalDateTime deadline;
     private String description;
 
-    @ManyToOne(fetch = FetchType.LAZY , cascade = REMOVE)
+    @ManyToOne(fetch = FetchType.LAZY )
     @JoinColumn(name= "project_id", referencedColumnName ="id")
     private Project project;
 
