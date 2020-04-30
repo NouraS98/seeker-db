@@ -37,7 +37,7 @@ public class Project extends BaseEntity {
 
     @OneToMany(
             mappedBy = "project",
-            cascade = REMOVE,
+            cascade = CascadeType.ALL ,
             fetch = FetchType.LAZY
     )
     private List<Milestone> milestones = new ArrayList<>();

@@ -3,10 +3,13 @@ package com.seekerhub.seeker.service.employer;
 import com.seekerhub.seeker.dto.Employer.EmployerDto;
 
 import com.seekerhub.seeker.entity.Employer;
+import com.seekerhub.seeker.entity.Project;
 import com.seekerhub.seeker.entity.User;
 import com.seekerhub.seeker.exception.GenericException;
 import com.seekerhub.seeker.mapper.EmployerMapper;
 import com.seekerhub.seeker.repository.EmployerRepository;
+import com.seekerhub.seeker.repository.ProjectRepository;
+import com.seekerhub.seeker.service.Project.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +23,12 @@ public class EmployerServiceImp implements EmployerService {
 
     @Autowired
     EmployerMapper employerMapper;
+
+    @Autowired
+    ProjectService projectService;
+
+    @Autowired
+    ProjectRepository projectRepository;
 
     @Override
     public EmployerDto save(EmployerDto employerDto) {
@@ -75,7 +84,7 @@ public class EmployerServiceImp implements EmployerService {
     }
 
     @Override
-    public void setRatingValues(long id, int num_of_ratings, int response_time, int total_on_time_payment, float total_emp_ratings) {
+    public void setRatingValues(long id, int num_of_ratings, int response_time, int total_on_time_payment, float total_emp_ratings, long project_id) {
         if(!employerRepository.existsById(id))
             throw new GenericException("The employer was not found");
         Employer employer = employerRepository.getOne(id);
@@ -84,6 +93,15 @@ public class EmployerServiceImp implements EmployerService {
         employer.setResponse_time(response_time);
         employer.setTotal_on_time_payment(total_on_time_payment);
         employer.setTotal_emp_ratings(total_emp_ratings);
+
+//        if (!projectRepository.existsById(project_id))
+//            throw new GenericException("The project was not found");
+//        Project project = projectRepository.getOne(project_id);
+//        project.setDid_fr_rate(true);
+
+        projectService.setFreelancerRated(project_id, true);
+
+//        projectRepository.save(project);
 
         employerRepository.save(employer);
 
